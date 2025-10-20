@@ -24,7 +24,7 @@ Se a leitura falhar, o sistema solicita nova tentativa.
 
 O sistema também retorna uma imagem de erro (❌)
 
-
+____________________________________________________________________
 
 Caso de Uso – RF2: Acesso ao sistema por meio de aplicativo mobile
 
@@ -48,7 +48,7 @@ Fluxo alternativo:
 
 Se as credenciais forem inválidas, o sistema exibe uma mensagem de erro (Tente Novamente 🌀).
 
-
+____________________________________________________________________
 
 Caso de Uso – RF3: Função de localização do docente
 
@@ -70,7 +70,7 @@ Fluxo alternativo:
 
 Caso o docente não esteja disponível, o sistema informa “Localização indisponível”.
 
-
+____________________________________________________________________
 
 Caso de Uso – RF4: Sistema de avisos e notificações
 
@@ -92,7 +92,7 @@ Fluxo alternativo:
 
 Se o aviso não puder ser entregue, o sistema registra a falha e mensagem de erro (Mensagem NÃO entregue 📭).
 
-
+____________________________________________________________________
  
 Caso de Uso – RF5: Instalação do software pelos discentes
 
@@ -116,6 +116,7 @@ Fluxo alternativo:
 
 Em caso de erro, o sistema exibe mensagem para seguir as instruções do suporte (Acesse o link de suporte 🔗).
 
+____________________________________________________________________
 
 Caso de Uso – RF6: Acompanhamento de presença
 
@@ -131,8 +132,7 @@ O docente/discente acessa o menu “Acompanhamento de presença”.
 
 O sistema mostra a lista de docentes presentes.
 
-
-
+____________________________________________________________________
  
 Caso de Uso – RF7: Cadastro e gerenciamento de docentes
 
@@ -156,7 +156,7 @@ Fluxo alternativo:
 
 Caso algum dado seja inválido, o sistema solicita correção (Dado inválido. Tente novamente ❌🌀).
 
-
+____________________________________________________________________
 
 Caso de Uso – RF8: Gerenciamento de turmas
 
