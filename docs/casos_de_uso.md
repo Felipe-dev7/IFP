@@ -1,4 +1,5 @@
 Caso de Uso – RF1: Leitura biométrica para registro de presença
+
 Ator principal: Docente
 Objetivo: Registrar presença de forma automática via leitura biométrica.
 Descrição: O sistema permite que o docente registre sua presença utilizando a biometria digital.
