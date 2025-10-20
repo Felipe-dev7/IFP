@@ -12,4 +12,4 @@ Felipe Gabriel Araújo de Freitas.
 Paulo Lázaro da Rocha Souza.
 Matheus Ramos Lima Silva.
 Luiz Philppe de Lima Silva.
-José Adrian.
+José Adrian Nascimento da Silva.
