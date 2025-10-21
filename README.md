@@ -27,7 +27,11 @@ Link do Planilhas: (https://docs.google.com/spreadsheets/d/1-9BcSoolZHs13L9EGBHf
 
 ## Equipe
 Felipe Gabriel Araújo de Freitas.
+
 Paulo Lázaro da Rocha Souza.
+
 Matheus Ramos Lima Silva.
+
 Luiz Philppe de Lima Silva.
+
 José Adrian Nascimento da Silva.
