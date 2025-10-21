@@ -12,7 +12,7 @@ O docente se apresenta no apoio e insere sua digital no leitor biométrico (pega
 - [Diagrama de casos de uso](assets/diagrama_de_casos_de_uso.png)
 - [Requisitos](assets/requisitos.png)
 - [Histórias de usuário](assets/historias_de_usuario.jpg)
-- [Diagrama de classes](assets\diagrama_de_classe.png)
+- [Diagrama de classes](assets\diagrama_de_classes.png)
 - [Critérios de aceitação](assets\criterios_de_aceitacao.png)
 
 ## Status
