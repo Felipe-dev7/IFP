@@ -22,6 +22,7 @@ Link do Trello para acompanhamento de status: (https://trello.com/b/XwgsOYCz/ifp
 
 ## Planilha
 Abaixo temos o link de uma planilha com algumas
+
 Link do Planilhas: (https://docs.google.com/spreadsheets/d/1-9BcSoolZHs13L9EGBHf7dgeSS8A4xNPNLjyjbB8Bbk/edit?usp=sharing)
 
 ## Equipe
