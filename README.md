@@ -8,10 +8,12 @@ O docente se apresenta no apoio e insere sua digital no leitor biométrico (pega
 - 'assets/' - Imagens e diagramas do projeto
 
 ## Documentação
-- [Casos de uso .md](docs/casos_de_uso.md)
-- [Casos de uso .jpg](assets/diagrama_de_caso_de_uso.png)
+- [Casos de uso](docs/casos_de_uso.md)
+- [Diagrama de casos de uso](assets/diagrama_de_casos_de_uso.png)
 - [Requisitos](assets/requisitos.png)
-- [Critérios de Aceitação](assets/historias_de_usuario.jpg)
+- [Histórias de usuário](assets/historias_de_usuario.jpg)
+- [Diagrama de classes](assets\diagrama_de_classe.png)
+- [Critérios de aceitação](assets\criterios_de_aceitacao.png)
 
 ## Status
 O software IFP ainda está em fase de planejamento. O escopo já foi fechado, os requisitos já foram levantados, os critérios de aceitação e as histórias de usuários já foram definidos.
