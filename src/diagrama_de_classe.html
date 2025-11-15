@@ -54,45 +54,73 @@
   
 
   <!-- Barra de navegação -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">IFP</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom shadow-lg">
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="home.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="requisitos.html">Requisitos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="criterios_de_aceitacao.html">Critérios de Aceitação</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="diagrama_de_classe.html">Diagrama de Classes</a>
-            <li class="nav-item">
-              <a class="nav-link" href="diagrama_de_casos_de_uso.html">Diagrama de Casos de Uso</a>
-            </li>
-          <li class="nav-item">
-            <a class="nav-link" href="historias_de_usuario.html">Histórias de Usuário</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="casos_de_uso.html">Casos de Uso</a>
-          </li>
-        </ul>
+      <div class="container">
+
+          <a class="navbar-brand d-flex align-items-center" href="home.html">
+
+              <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
+              <strong>IFP</strong>
+
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+
+              <span class="navbar-toggler-icon"></span>
+
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+
+              <ul class="navbar-nav ml-auto">
+
+                  <li class="nav-item mx-1">
+
+                      <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
+                      
+                  </li>
+                  
+                  <li class="nav-item dropdown mx-1">
+
+                      <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
+                        href="#" data-toggle="dropdown">
+                          📋 Docs
+                      </a>
+
+                      <div class="dropdown-menu">
+
+                          <h6 class="dropdown-header">Documentação</h6>
+                          <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
+                          <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
+                          <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
+                          <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
+
+                      </div>
+
+                  </li>
+                  
+                  <li class="nav-item dropdown mx-1">
+                      <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
+                        href="#" data-toggle="dropdown">
+                          📊 Diagramas
+                      </a>
+                      <div class="dropdown-menu">
+                          <h6 class="dropdown-header">Modelos Visuais</h6>
+                          <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
+                          <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
+                      </div>
+                  </li>
+
+              </ul>
+          </div>
       </div>
-    </div>
   </nav>
 
   <!-- Breadcrumb -->
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">Diagrama de Classes</li>
+      <li class="breadcrumb-item active" aria-current="page"><h5><strong>Diagrama de Classes</strong></h5></li>
     </ol>
   </nav>
 
@@ -112,10 +140,14 @@
 
   <!-- Rodapé -->
 
-<footer class="bg-dark text-white text-center py-4 mt-auto">
+<footer class="bg-dark text-white text-center py-3 mt-auto">
+
   <div class="container">
-    <p class="mb-0">&copy; 2025 IFP</p>
+
+    <h5 class="mb-0">&copy; 2025 IFP</h5>
+
   </div>
+
 </footer>
 
 
