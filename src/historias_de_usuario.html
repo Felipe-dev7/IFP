@@ -16,7 +16,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
 
-<!-- CSS customizado para o rodapé ficar fixo embaixo -->
+  <!-- CSS customizado -->
   <style>
     html, body {
       height: 100%;
@@ -32,133 +32,132 @@
 
     main {
       flex: 1;
-    }
-  </style>
-
-</head>
-
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      background-color: #f0f0f0;
-      font-family: sans-serif;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      /* justify-content: center; */
-      align-items: center;
-      text-align: center;
-      padding: 20px;
     }
 
     .content-container {
-      max-width: 90%;
+      max-width: 100%;
       color: rgb(0, 37, 139);
-    }
-
-    .content-container_2 {
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    flex: 0.7;
-    }
-
-
-
-    h1 {
-      margin-bottom: 30px;
-      font-weight: bold;
+      text-align: center;
     }
 
     .historias-img {
-      width: 1600px;
+      width: 100%;
+      max-width: 900px;
       height: auto;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      margin: 40px auto;
     }
 
-    /* Manter o breadcrumb visível */
+    .historia-card {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-left: 4px solid #28a745;
+      transition: transform 0.2s ease;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .historia-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .historia-id {
+      background: #28a745;
+      color: white;
+      border-radius: 5px;
+      padding: 8px 15px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .historia-role {
+      color: #6c757d;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+
     .breadcrumb {
       background-color: transparent;
       margin-bottom: 0;
     }
-  </style>
 
+    .historias-list {
+      width: 100%;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .historia-content {
+      text-align: left;
+    }
+
+    .historia-content h6 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .historia-content p {
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
 
 <body>
   
-
   <!-- Barra de navegação -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom shadow-lg">
-
-      <div class="container">
-
-          <a class="navbar-brand d-flex align-items-center" href="home.html">
-
-              <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
-              <strong>IFP</strong>
-
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-
-              <span class="navbar-toggler-icon"></span>
-
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarNav">
-
-              <ul class="navbar-nav ml-auto">
-
-                  <li class="nav-item mx-1">
-
-                      <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
-                      
-                  </li>
-                  
-                  <li class="nav-item dropdown mx-1">
-
-                      <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
-                        href="#" data-toggle="dropdown">
-                          📋 Docs
-                      </a>
-
-                      <div class="dropdown-menu">
-
-                          <h6 class="dropdown-header">Documentação</h6>
-                          <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
-                          <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
-                          <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
-                          <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
-
-                      </div>
-
-                  </li>
-                  
-                  <li class="nav-item dropdown mx-1">
-                      <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
-                        href="#" data-toggle="dropdown">
-                          📊 Diagramas
-                      </a>
-                      <div class="dropdown-menu">
-                          <h6 class="dropdown-header">Modelos Visuais</h6>
-                          <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
-                          <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
-                      </div>
-                  </li>
-
-              </ul>
-          </div>
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="home.html">
+        <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
+        <strong>IFP</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-1">
+            <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
+          </li>
+          <li class="nav-item dropdown mx-1">
+            <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
+              href="#" data-toggle="dropdown">
+                📋 Docs
+            </a>
+            <div class="dropdown-menu">
+              <h6 class="dropdown-header">Documentação</h6>
+              <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
+              <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
+              <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
+              <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown mx-1">
+            <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
+              href="#" data-toggle="dropdown">
+                📊 Diagramas
+            </a>
+            <div class="dropdown-menu">
+              <h6 class="dropdown-header">Modelos Visuais</h6>
+              <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
+              <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
+            </div>
+          </li>
+        </ul>
       </div>
+    </div>
   </nav>
 
   <!-- Breadcrumb -->
@@ -168,31 +167,89 @@
     </ol>
   </nav>
 
-  <!-- Conteúdo histórias de usuário-->
-  <main>
-    <div class="content-container">
-      <h1>Histórias de Usuário</h1>
+  <!-- Conteúdo histórico de usuário -->
+  <main class="container my-5">
+    <div class="content-container mb-5">
+      <h1 class="mb-3">Histórias de Usuário</h1>
     </div>
 
-    <div class='content-container_2'>
-      <img src="/assets/historias_de_usuario.jpg" alt="Requisitos do sistema IFP" class="historias-img">
+    <!-- Lista de Histórias -->
+    <div class="historias-list">
+      <div class="historia-card">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="historia-id">US01</span>
+          <span class="historia-role">👤 Usuário</span>
+        </div>
+        <div class="historia-content">
+          <h6>🎯 <strong>Desejo:</strong> Realizar login utilizando meu e-mail institucional e minha senha</h6>
+          <p class="mt-3"><strong>📌 Para:</strong> Acessar plataforma (mobile), de acordo com o meu acesso (discente/docente)</p>
+        </div>
+      </div>
+
+      <div class="historia-card">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="historia-id">US02</span>
+          <span class="historia-role">👨‍🏫 Professor</span>
+        </div>
+        <div class="historia-content">
+          <h6>🎯 <strong>Desejo:</strong> Adicionar minha localização (opcional)</h6>
+          <p class="mt-3"><strong>📌 Para:</strong> Facilitar que eu seja encontrado pelos discentes (principalmente em caso de solicitação de atividade acadêmica)</p>
+        </div>
+      </div>
+
+      <div class="historia-card">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="historia-id">US03</span>
+          <span class="historia-role">👨‍🎓 Aluno</span>
+        </div>
+        <div class="historia-content">
+          <h6>🎯 <strong>Desejo:</strong> Verificar presença do docente</h6>
+          <p class="mt-3"><strong>📌 Para:</strong> Saber se terá aula (podendo alterar o fluxo de aula normal - adiantando as aulas por exemplo)</p>
+        </div>
+      </div>
+
+      <div class="historia-card">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="historia-id">US04</span>
+          <span class="historia-role">👨‍🎓 Aluno</span>
+        </div>
+        <div class="historia-content">
+          <h6>🎯 <strong>Desejo:</strong> Verificar localização do docente</h6>
+          <p class="mt-3"><strong>📌 Para:</strong> Funcionar em conjunto com a história US02 ou podendo encontrar o docente para tirar alguma dúvida</p>
+        </div>
+      </div>
+
+      <div class="historia-card">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="historia-id">US05</span>
+          <span class="historia-role">👨‍🏫 Professor</span>
+        </div>
+        <div class="historia-content">
+          <h6>🎯 <strong>Desejo:</strong> Adicionar avisos</h6>
+          <p class="mt-3"><strong>📌 Para:</strong> Manter comunicação estável com os discentes</p>
+        </div>
+      </div>
+
+      <div class="historia-card">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <span class="historia-id">US06</span>
+          <span class="historia-role">👨‍🎓 Aluno</span>
+        </div>
+        <div class="historia-content">
+          <h6>🎯 <strong>Desejo:</strong> Mandar mensagens para o docente</h6>
+          <p class="mt-3"><strong>📌 Para:</strong> Tirar dúvidas e remanejar aulas</p>
+        </div>
+      </div>
     </div>
+
   </main>
 
-
   <!-- Rodapé -->
-
-<footer class="bg-dark text-white text-center py-3 mt-auto">
-
-  <div class="container">
-
-    <h5 class="mb-0">&copy; 2025 IFP</h5>
-
-  </div>
-
-</footer>
-
-
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <div class="container">
+      <h5 class="mb-0">&copy; 2025 IFP</h5>
+    </div>
+  </footer>
 
   <!-- Scripts do Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -204,6 +261,5 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-
 </body>
 </html>
