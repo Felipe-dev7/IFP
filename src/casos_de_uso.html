@@ -7,16 +7,13 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Casos de Uso</title>
 
-  <!-- Meta descrição para SEO -->
-  <meta name="description" content="Página dedicada a informações do futuro software IFP">
-
   <!-- CSS do Bootstrap -->
   <link rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
 
-<!-- CSS customizado para o rodapé ficar fixo embaixo -->
+  <!-- CSS customizado -->
   <style>
     html, body {
       height: 100%;
@@ -33,91 +30,75 @@
     main {
       flex: 1;
     }
-  </style>
 
+    .caso-uso {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-left: 4px solid #007bff;
+    }
+
+    .caso-titulo {
+      color: #2c3e50;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .fluxo-section {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+  </style>
 </head>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const links = document.querySelectorAll(".navbar-nav .nav-link");
-    const currentPage = window.location.pathname.split("/").pop();
-
-    links.forEach(link => {
-      const linkPage = link.getAttribute("href");
-      if (linkPage === currentPage) {
-        link.classList.add("active");
-      }
-    });
-  });
-
-</script>
-
-
 <body>
-  
-
   <!-- Barra de navegação -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom shadow-lg">
-
-      <div class="container">
-
-          <a class="navbar-brand d-flex align-items-center" href="home.html">
-
-              <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
-              <strong>IFP</strong>
-
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-
-              <span class="navbar-toggler-icon"></span>
-
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarNav">
-
-              <ul class="navbar-nav ml-auto">
-
-                  <li class="nav-item mx-1">
-
-                      <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
-                      
-                  </li>
-                  
-                  <li class="nav-item dropdown mx-1">
-
-                      <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
-                        href="#" data-toggle="dropdown">
-                          📋 Docs
-                      </a>
-
-                      <div class="dropdown-menu">
-
-                          <h6 class="dropdown-header">Documentação</h6>
-                          <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
-                          <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
-                          <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
-                          <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
-
-                      </div>
-
-                  </li>
-                  
-                  <li class="nav-item dropdown mx-1">
-                      <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
-                        href="#" data-toggle="dropdown">
-                          📊 Diagramas
-                      </a>
-                      <div class="dropdown-menu">
-                          <h6 class="dropdown-header">Modelos Visuais</h6>
-                          <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
-                          <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
-                      </div>
-                  </li>
-
-              </ul>
-          </div>
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="home.html">
+        <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
+        <strong>IFP</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-1">
+            <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
+          </li>
+          <li class="nav-item dropdown mx-1">
+            <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
+              href="#" data-toggle="dropdown">
+                📋 Docs
+            </a>
+            <div class="dropdown-menu">
+              <h6 class="dropdown-header">Documentação</h6>
+              <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
+              <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
+              <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
+              <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown mx-1">
+            <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
+              href="#" data-toggle="dropdown">
+                📊 Diagramas
+            </a>
+            <div class="dropdown-menu">
+              <h6 class="dropdown-header">Modelos Visuais</h6>
+              <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
+              <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
+            </div>
+          </li>
+        </ul>
       </div>
+    </div>
   </nav>
 
   <!-- Breadcrumb -->
@@ -127,33 +108,260 @@
     </ol>
   </nav>
 
-  <!-- Conteúdo principal  (main)-->
-  <main class="container my-5">
-    <h1 class="text-center mb-4">Bem-vindo(a)!</h1>
-   
-    <h1 class="text-center mb-4">Olá, eu sou Viviane! 👋</h1>
-    <p class="text-center lead">
-      Sou professora e entusiasta da tecnologia, apaixonada por educação e inovação.
-      Nesta página, compartilho um pouco sobre minha trajetória acadêmica e profissional.
-    </p>
-  </section>
-</main>
+<!-- Conteúdo casos de uso -->
+<main class="container my-5">
+    <div class="text-center mb-5">
+      <h1 class="text-primary">Casos de Uso</h1>
+      <p class="lead text-muted">Documentação detalhada dos fluxos do sistema IFP</p>
+    </div>
+
+    <!-- Caso de Uso 1 -->
+    <div class="caso-uso">
+      <h3 class="caso-titulo text-center">📋 RF1: Leitura biométrica para registro de presença</h3>
+      <div class="row text-center mb-3">
+        <div class="col-md-6">
+          <strong>🎯 Ator principal:</strong> Docente
+        </div>
+        <div class="col-md-6">
+          <strong>🎯 Objetivo:</strong> Registrar presença de forma automática via leitura biométrica
+        </div>
+      </div>
+      <p class="text-center"><strong>Descrição:</strong> O sistema permite que o docente registre sua presença utilizando a biometria digital.</p>
+      
+      <div class="fluxo-section">
+        <h5 class="text-success">🟢 Fluxo Principal:</h5>
+        <ul class="list-unstyled">
+          <li>• O docente acessa o leitor biométrico</li>
+          <li>• O sistema solicita a leitura digital</li>
+          <li>• O docente posiciona o dedo no leitor</li>
+          <li>• O sistema valida a biometria e registra a presença</li>
+          <li>• O sistema confirma o registro com uma imagem <strong>(✅)</strong></li>
+        </ul>
+      </div>
+
+      <div class="fluxo-section">
+        <h5 class="text-warning">🟡 Fluxo Alternativo:</h5>
+        <ul class="list-unstyled">
+          <li>• Se a leitura falhar, o sistema solicita nova tentativa</li>
+          <li>• O sistema também retorna uma imagem de erro <strong>(❌)</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Caso de Uso 2 -->
+    <div class="caso-uso">
+      <h3 class="caso-titulo text-center">📱 RF2: Acesso ao sistema por meio de aplicativo mobile</h3>
+      <div class="row text-center mb-3">
+        <div class="col-md-6">
+          <strong>🎯 Ator principal:</strong> Discente e Docente
+        </div>
+        <div class="col-md-6">
+          <strong>🎯 Objetivo:</strong> Permitir o acesso ao sistema via aplicativo móvel
+        </div>
+      </div>
+      <p class="text-center"><strong>Descrição:</strong> Usuários podem acessar o sistema por um app no celular.</p>
+      
+      <div class="fluxo-section">
+        <h5 class="text-success">🟢 Fluxo Principal:</h5>
+        <ul class="list-unstyled">
+          <li>• O usuário abre o aplicativo</li>
+          <li>• Insere suas credenciais (login e senha)</li>
+          <li>• O sistema valida os dados e libera o acesso</li>
+          <li>• O usuário navega pelas funções disponíveis</li>
+        </ul>
+      </div>
+
+      <div class="fluxo-section">
+        <h5 class="text-warning">🟡 Fluxo Alternativo:</h5>
+        <ul class="list-unstyled">
+          <li>• Se as credenciais forem inválidas, o sistema exibe uma mensagem de erro <strong>(Tente Novamente 🌀)</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Caso de Uso 3 -->
+    <div class="caso-uso">
+      <h3 class="caso-titulo text-center">📍 RF3: Função de localização do docente</h3>
+      <div class="row text-center mb-3">
+        <div class="col-md-6">
+          <strong>🎯 Ator principal:</strong> Discente
+        </div>
+        <div class="col-md-6">
+          <strong>🎯 Objetivo:</strong> Permitir que os alunos visualizem a localização do professor
+        </div>
+      </div>
+      <p class="text-center"><strong>Descrição:</strong> O sistema mostra a localização atual do docente dentro do campus.</p>
+      
+      <div class="fluxo-section">
+        <h5 class="text-success">🟢 Fluxo Principal:</h5>
+        <ul class="list-unstyled">
+          <li>• O aluno acessa o aplicativo</li>
+          <li>• Seleciona "Localizar docente"</li>
+          <li>• O sistema exibe a posição do professor (sala)</li>
+        </ul>
+      </div>
+
+      <div class="fluxo-section">
+        <h5 class="text-warning">🟡 Fluxo Alternativo:</h5>
+        <ul class="list-unstyled">
+          <li>• Caso o docente não esteja disponível, o sistema informa <strong>"Localização indisponível"</strong></li>
+        </ul>
+      </div>
+    </div>
+
+<!-- Caso de Uso 4 -->
+<div class="caso-uso">
+  <h3 class="caso-titulo text-center">📢 RF4: Sistema de avisos e notificações</h3>
+  <div class="row text-center mb-3">
+    <div class="col-md-6">
+      <strong>🎯 Ator principal:</strong> Docente e Discente
+    </div>
+    <div class="col-md-6">
+      <strong>🎯 Objetivo:</strong> Enviar e receber avisos e notificações do sistema
+    </div>
+  </div>
+  <p class="text-center"><strong>Descrição:</strong> O sistema notifica usuários sobre eventos, avisos de aula ou mensagens administrativas.</p>
   
-  </main>
-
-  <!-- Rodapé -->
-
-<footer class="bg-dark text-white text-center py-3 mt-auto">
-
-  <div class="container">
-
-    <h5 class="mb-0">&copy; 2025 IFP</h5>
-
+  <div class="fluxo-section">
+    <h5 class="text-success">🟢 Fluxo Principal:</h5>
+    <ul class="list-unstyled">
+      <li>• O docente cria um aviso no sistema</li>
+      <li>• O sistema envia notificações aos alunos</li>
+      <li>• O aluno visualiza a notificação no aplicativo</li>
+    </ul>
   </div>
 
-</footer>
+  <div class="fluxo-section">
+    <h5 class="text-warning">🟡 Fluxo Alternativo:</h5>
+    <ul class="list-unstyled">
+      <li>• Se o aviso não puder ser entregue, o sistema registra a falha e mensagem de erro <strong>(Mensagem NÃO entregue 📭)</strong></li>
+    </ul>
+  </div>
+</div>
 
+  <!-- Caso de Uso 5 -->
+  <div class="caso-uso">
+    <h3 class="caso-titulo text-center">📥 RF5: Instalação do software pelos discentes</h3>
+    <div class="row text-center mb-3">
+      <div class="col-md-6">
+        <strong>🎯 Ator principal:</strong> Discente
+      </div>
+      <div class="col-md-6">
+        <strong>🎯 Objetivo:</strong> Permitir que os alunos instalem o software em seus dispositivos
+      </div>
+    </div>
+    <p class="text-center"><strong>Descrição:</strong> O sistema disponibiliza um instalador simples para os alunos.</p>
+    
+    <div class="fluxo-section">
+      <h5 class="text-success">🟢 Fluxo Principal:</h5>
+      <ul class="list-unstyled">
+        <li>• O aluno acessa o site do sistema</li>
+        <li>• Faz o download do instalador</li>
+        <li>• Executa a instalação seguindo o assistente</li>
+        <li>• O sistema confirma a instalação bem-sucedida</li>
+      </ul>
+    </div>
 
+    <div class="fluxo-section">
+      <h5 class="text-warning">🟡 Fluxo Alternativo:</h5>
+      <ul class="list-unstyled">
+        <li>• Em caso de erro, o sistema exibe mensagem para seguir as instruções do suporte <strong>(Acesse o link de suporte 🔗)</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Caso de Uso 6 -->
+  <div class="caso-uso">
+    <h3 class="caso-titulo text-center">📊 RF6: Acompanhamento de presença</h3>
+    <div class="row text-center mb-3">
+      <div class="col-md-6">
+        <strong>🎯 Ator principal:</strong> Docente e Discente
+      </div>
+      <div class="col-md-6">
+        <strong>🎯 Objetivo:</strong> Permitir o acompanhamento da frequência dos Docentes
+      </div>
+    </div>
+    <p class="text-center"><strong>Descrição:</strong> O sistema exibe a presença dos docentes no dia.</p>
+    
+    <div class="fluxo-section">
+      <h5 class="text-success">🟢 Fluxo Principal:</h5>
+      <ul class="list-unstyled">
+        <li>• O docente/discente acessa o menu <strong>"Acompanhamento de presença"</strong></li>
+        <li>• O sistema mostra a lista de docentes presentes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Caso de Uso 7 -->
+  <div class="caso-uso">
+    <h3 class="caso-titulo text-center">👨‍🏫 RF7: Cadastro e gerenciamento de docentes</h3>
+    <div class="row text-center mb-3">
+      <div class="col-md-6">
+        <strong>🎯 Ator principal:</strong> Administrador e Docente
+      </div>
+      <div class="col-md-6">
+        <strong>🎯 Objetivo:</strong> Cadastrar, editar ou remover dados de docentes
+      </div>
+    </div>
+    <p class="text-center"><strong>Descrição:</strong> O sistema permite o docente gerenciar informações dos discentes da instituição.</p>
+    
+    <div class="fluxo-section">
+      <h5 class="text-success">🟢 Fluxo Principal:</h5>
+      <ul class="list-unstyled">
+        <li>• O docente/administrador acessa o módulo de discentes</li>
+        <li>• Escolhe alterar informações do discente</li>
+        <li>• Altera os dados <strong>(Nota, Mensagens enviadas, etc)</strong></li>
+        <li>• O sistema grava as novas informações</li>
+      </ul>
+    </div>
+
+    <div class="fluxo-section">
+      <h5 class="text-warning">🟡 Fluxo Alternativo:</h5>
+      <ul class="list-unstyled">
+        <li>• Caso algum dado seja inválido, o sistema solicita correção <strong>(Dado inválido. Tente novamente ❌🌀)</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Caso de Uso 8 -->
+  <div class="caso-uso">
+    <h3 class="caso-titulo text-center">👥 RF8: Gerenciamento de turmas</h3>
+    <div class="row text-center mb-3">
+      <div class="col-md-6">
+        <strong>🎯 Ator principal:</strong> Administrador e Docente
+      </div>
+      <div class="col-md-6">
+        <strong>🎯 Objetivo:</strong> Criar e administrar turmas no sistema
+      </div>
+    </div>
+    <p class="text-center"><strong>Descrição:</strong> O sistema permite que o administrador e o docente realizem o gerenciamento das turmas, podendo editá-las, alterá-las, movê-las, entre outros.</p>
+    
+    <div class="fluxo-section">
+      <h5 class="text-success">🟢 Fluxo Principal:</h5>
+      <ul class="list-unstyled">
+        <li>• O administrador/docente acessa o módulo <strong>"Turmas"</strong></li>
+        <li>• Cadastra uma nova turma com nome e curso</li>
+        <li>• Adiciona alunos</li>
+        <li>• O sistema salva e exibe a turma criada</li>
+      </ul>
+    </div>
+
+    <div class="fluxo-section">
+      <h5 class="text-warning">🟡 Fluxo Alternativo:</h5>
+      <ul class="list-unstyled">
+        <li>• Caso algum campo esteja incompleto, o sistema impede o cadastro <strong>(Cadastro inválido 📄❌)</strong></li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+  <!-- Rodapé -->
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <div class="container">
+      <h5 class="mb-0">&copy; 2025 IFP</h5>
+    </div>
+  </footer>
 
   <!-- Scripts do Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -165,8 +373,5 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-
-    
-
 </body>
 </html>
