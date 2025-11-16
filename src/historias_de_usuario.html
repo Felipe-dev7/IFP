@@ -37,19 +37,59 @@
 
 </head>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const links = document.querySelectorAll(".navbar-nav .nav-link");
-    const currentPage = window.location.pathname.split("/").pop();
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
 
-    links.forEach(link => {
-      const linkPage = link.getAttribute("href");
-      if (linkPage === currentPage) {
-        link.classList.add("active");
-      }
-    });
-  });
-</script>
+    body {
+      display: flex;
+      flex-direction: column;
+      background-color: #f0f0f0;
+      font-family: sans-serif;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      /* justify-content: center; */
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .content-container {
+      max-width: 90%;
+      color: rgb(0, 37, 139);
+    }
+
+    .content-container_2 {
+      max-width: 90%;
+      color: rgb(0, 37, 139);
+    }
+
+
+
+    h1 {
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    .historias-img {
+      width: 1600px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Manter o breadcrumb visível */
+    .breadcrumb {
+      background-color: transparent;
+      margin-bottom: 0;
+    }
+  </style>
 
 
 <body>
@@ -126,19 +166,17 @@
     </ol>
   </nav>
 
-  <!-- Conteúdo principal  (main)-->
-  <main class="container my-5">
-    <h1 class="text-center mb-4">Bem-vindo(a)!</h1>
-   
-    <h1 class="text-center mb-4">Olá, eu sou Viviane! 👋</h1>
-    <p class="text-center lead">
-      Sou professora e entusiasta da tecnologia, apaixonada por educação e inovação.
-      Nesta página, compartilho um pouco sobre minha trajetória acadêmica e profissional.
-    </p>
-  </section>
-</main>
+  <!-- Conteúdo principal com imagem centralizada -->
+  <main>
+    <div class="content-container">
+      <h1>Histórias de Usuário</h1>
+    </div>
 
+    <div class='content-container_2'>
+      <img src="/assets/historias_de_usuario.jpg" alt="Requisitos do sistema IFP" class="historias-img">
+    </div>
   </main>
+
 
   <!-- Rodapé -->
 
