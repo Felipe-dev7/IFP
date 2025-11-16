@@ -5,16 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Critérios de Aceitação</title>
+  <title>Critérios de Aceitação - IFP</title>
 
   <!-- Meta descrição para SEO -->
-  <meta name="description" content="Página dedicada a informações do futuro software IFP">
+  <meta name="description" content="Página dedicada aos critérios de aceitação do software IFP">
 
   <!-- CSS do Bootstrap -->
   <link rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
+
+  <!-- Ícones do Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <!-- CSS customizado -->
   <style>
@@ -26,41 +29,131 @@
     body {
       display: flex;
       flex-direction: column;
-      background-color: #f0f0f0;
-      font-family: sans-serif;
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     main {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
       padding: 20px;
     }
 
     .content-container {
-      max-width: 90%;
-      color: rgb(0, 37, 139);
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     h1 {
       margin-bottom: 30px;
       font-weight: bold;
+      color: #00258b;
+      text-align: center;
     }
 
-    .criterios-img {
-      width: 1500px;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    .card-criterio {
+      transition: all 0.3s ease;
+      border-left: 4px solid #007bff;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    .card-criterio:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #e3e6f0;
+    }
+
+    .badge-rf {
+      background-color: #28a745;
+    }
+
+    .badge-id {
+      background-color: #007bff;
+    }
+
+    .search-container {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .filter-btn {
+      border-radius: 20px;
+      padding: 5px 15px;
+      font-size: 0.85rem;
+    }
+
+    .filter-btn.active {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .criterio-details {
+      display: none;
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-top: 3px solid #007bff;
+    }
+
+    .criteria-list {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .criteria-item {
+      padding-left: 10px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .criteria-item:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #007bff;
+    }
+
+    .back-to-list {
+      margin-bottom: 15px;
     }
 
     /* Manter o breadcrumb visível */
     .breadcrumb {
       background-color: transparent;
       margin-bottom: 0;
+    }
+
+    /* Animações */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .filter-buttons {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -117,11 +210,44 @@
     </ol>
   </nav>
 
-  <!-- Conteúdo critérios de aceitação-->
+  <!-- Conteúdo critérios de aceitação -->
   <main>
     <div class="content-container">
-      <h1>ㅤㅤㅤCritérios de Aceitação</h1>
-      <img src="/assets/criterios_de_aceitacao.png" alt="Critérios de aceitação IFP" class="criterios-img">
+      <h1>Critérios de Aceitação</h1>
+      
+      <!-- Área de busca e filtros -->
+      <div class="search-container fade-in">
+        <div class="form-group mb-0">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar nos critérios...">
+          </div>
+        </div>
+        
+        <div class="filter-buttons">
+          <button class="btn btn-outline-primary filter-btn active" data-filter="all">Todos</button>
+          <button class="btn btn-outline-primary filter-btn" data-filter="CA01">CA01</button>
+          <button class="btn btn-outline-primary filter-btn" data-filter="CA02">CA02</button>
+          <button class="btn btn-outline-primary filter-btn" data-filter="CA03">CA03</button>
+          <button class="btn btn-outline-primary filter-btn" data-filter="CA04">CA04</button>
+          <button class="btn btn-outline-primary filter-btn" data-filter="CA05">CA05</button>
+          <button class="btn btn-outline-primary filter-btn" data-filter="CA06">CA06</button>
+          <button class="btn btn-outline-primary filter-btn" data-filter="CA07">CA07</button>
+          <button class="btn btn-outline-primary filter-btn" data-filter="CA08">CA08</button>
+        </div>
+      </div>
+
+      <!-- Lista de critérios -->
+      <div id="criteriosList" class="criteria-list fade-in">
+        <!-- Os critérios serão carregados aqui via JavaScript -->
+      </div>
+
+      <!-- Detalhes do critério selecionado -->
+      <div id="criterioDetails" class="criterio-details">
+        <!-- Conteúdo será preenchido via JavaScript -->
+      </div>
     </div>
   </main>
 
@@ -143,8 +269,230 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
+  <!-- JavaScript customizado -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    // Dados dos critérios de aceitação
+    const criterios = [
+      {
+        id: "CA01",
+        rf: "RF1",
+        titulo: "Leitura biométrica para registro de presença",
+        criterios: [
+          "Validar que a digital informada corresponde a um docente cadastrado no sistema.",
+          "Caso a digital seja reconhecida, o sistema deve marcar o docente como presente e exibir a mensagem 'Presença registrada com sucesso'.",
+          "Caso a digital não seja reconhecida, exibir mensagem de erro: 'Digital não reconhecida. Tente novamente.'"
+        ]
+      },
+      {
+        id: "CA02",
+        rf: "RF2",
+        titulo: "Acesso ao sistema por meio de aplicativo mobile",
+        criterios: [
+          "O docente deve conseguir instalar e acessar o aplicativo em seu smartphone.",
+          "O login só será aceito com autenticação válida (biometria ou senha correta).",
+          "Caso a autenticação falhe, exibir mensagem de erro: 'Falha na autenticação. Verifique seus dados.'"
+        ]
+      },
+      {
+        id: "CA03",
+        rf: "RF3",
+        titulo: "Função de localização do docente",
+        criterios: [
+          "O sistema deve permitir ao docente adicionar manualmente sua localização no campus.",
+          "Se o docente não informar manualmente, o sistema deve atribuir automaticamente sua localização com base no horário de aula e na presença registrada.",
+          "A localização exibida deve ser visível para administradores e alunos vinculados à turma."
+        ]
+      },
+      {
+        id: "CA04",
+        rf: "RF4",
+        titulo: "Sistema de avisos e notificações",
+        criterios: [
+          "O docente deve conseguir enviar notificações para as turmas cadastradas.",
+          "Os discentes devem receber notificações em tempo real (ou próximo disso) após o envio.",
+          "Caso o envio falhe, o sistema deve exibir mensagem: 'Erro ao enviar notificação. Tente novamente.'"
+        ]
+      },
+      {
+        id: "CA05",
+        rf: "RF5",
+        titulo: "Instalação do software pelos discentes",
+        criterios: [
+          "O discente deve conseguir instalar o app em Android e iOS.",
+          "Após instalar, deve se cadastrar e se inscrever nas turmas disponíveis.",
+          "O sistema deve garantir que ele receba apenas notificações das turmas inscritas.",
+          "Se não houver vínculo em turmas, exibir: 'Nenhuma turma encontrada. Inscreva-se em uma turma para receber notificações'."
+        ]
+      },
+      {
+        id: "CA06",
+        rf: "RF6",
+        titulo: "Acompanhamento de presença",
+        criterios: [
+          "O administrador deve visualizar a lista de presenças dos docentes com data e horário registrados.",
+          "O sistema deve gerar relatórios em PDF e planilha, quando solicitado.",
+          "Caso não haja registros no período selecionado, o relatório deve exibir a mensagem: 'Nenhum registro encontrado.'"
+        ]
+      },
+      {
+        id: "CA07",
+        rf: "RF7",
+        titulo: "Cadastro e gerenciamento de docentes",
+        criterios: [
+          "O administrador deve cadastrar novos docentes com dados pessoais e digitais.",
+          "O sistema deve permitir atualização de dados de docentes.",
+          "O sistema deve vincular corretamente as digitais ao perfil cadastrado."
+        ]
+      },
+      {
+        id: "CA08",
+        rf: "RF8",
+        titulo: "Gerenciamento de turmas",
+        criterios: [
+          "O administrador deve vincular docentes às turmas e definir horários e locais de aula.",
+          "As turmas devem ser exibidas corretamente no app dos discentes.",
+          "Se uma turma for removida ou alterada, as mudanças devem refletir imediatamente no app."
+        ]
+      }
+    ];
+
+    // Função para renderizar a lista de critérios
+    function renderCriterios(filteredCriterios = criterios) {
+      const criteriosList = document.getElementById('criteriosList');
+      criteriosList.innerHTML = '';
+
+      if (filteredCriterios.length === 0) {
+        criteriosList.innerHTML = `
+          <div class="alert alert-info text-center">
+            <i class="fas fa-info-circle mr-2"></i>
+            Nenhum critério encontrado com os filtros atuais.
+          </div>
+        `;
+        return;
+      }
+
+      filteredCriterios.forEach(criterio => {
+        const card = document.createElement('div');
+        card.className = 'card card-criterio';
+        card.setAttribute('data-id', criterio.id);
+        
+        card.innerHTML = `
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+              <span class="badge badge-id mr-2">${criterio.id}</span>
+              <span class="badge badge-rf">${criterio.rf}</span>
+            </div>
+            <button class="btn btn-sm btn-outline-primary view-details" data-id="${criterio.id}">
+              <i class="fas fa-eye mr-1"></i> Detalhes
+            </button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">${criterio.titulo}</h5>
+            <p class="card-text text-muted">${criterio.criterios[0]}</p>
+          </div>
+        `;
+        
+        criteriosList.appendChild(card);
+      });
+
+      // Adicionar event listeners aos botões de detalhes
+      document.querySelectorAll('.view-details').forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const id = this.getAttribute('data-id');
+          showCriterioDetails(id);
+        });
+      });
+
+      // Adicionar event listener aos cards
+      document.querySelectorAll('.card-criterio').forEach(card => {
+        card.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          showCriterioDetails(id);
+        });
+      });
+    }
+
+    // Função para mostrar detalhes de um critério específico
+    function showCriterioDetails(id) {
+      const criterio = criterios.find(c => c.id === id);
+      if (!criterio) return;
+
+      const detailsContainer = document.getElementById('criterioDetails');
+      const criteriosList = document.getElementById('criteriosList');
+      
+      // Esconder lista e mostrar detalhes
+      criteriosList.style.display = 'none';
+      detailsContainer.style.display = 'block';
+      
+      // Preencher detalhes
+      detailsContainer.innerHTML = `
+        <button class="btn btn-outline-secondary btn-sm back-to-list">
+          <i class="fas fa-arrow-left mr-1"></i> Voltar à lista
+        </button>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="mb-0">
+            <span class="badge badge-id mr-2">${criterio.id}</span>
+            <span class="badge badge-rf">${criterio.rf}</span>
+          </h3>
+        </div>
+        <h4 class="mb-4">${criterio.titulo}</h4>
+        <h5>Critérios de Aceitação:</h5>
+        <ul class="list-unstyled">
+          ${criterio.criterios.map((item, index) => `
+            <li class="criteria-item mb-2">${item}</li>
+          `).join('')}
+        </ul>
+      `;
+
+      // Adicionar event listener ao botão de voltar
+      detailsContainer.querySelector('.back-to-list').addEventListener('click', function() {
+        detailsContainer.style.display = 'none';
+        criteriosList.style.display = 'block';
+      });
+    }
+
+    // Função para filtrar critérios
+    function filterCriterios() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+      
+      let filtered = criterios;
+      
+      // Aplicar filtro por ID/RF
+      if (activeFilter !== 'all') {
+        filtered = filtered.filter(c => c.id === activeFilter);
+      }
+      
+      // Aplicar busca textual
+      if (searchTerm) {
+        filtered = filtered.filter(c => 
+          c.titulo.toLowerCase().includes(searchTerm) ||
+          c.criterios.some(item => item.toLowerCase().includes(searchTerm))
+        );
+      }
+      
+      renderCriterios(filtered);
+    }
+
+    // Inicialização quando o DOM estiver carregado
+    document.addEventListener('DOMContentLoaded', function() {
+      // Renderizar critérios iniciais
+      renderCriterios();
+      
+      // Configurar busca
+      document.getElementById('searchInput').addEventListener('input', filterCriterios);
+      
+      // Configurar filtros
+      document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          filterCriterios();
+        });
+      });
+
+      // Ativar link atual na navegação
       const links = document.querySelectorAll(".navbar-nav .nav-link");
       const currentPage = window.location.pathname.split("/").pop();
 
