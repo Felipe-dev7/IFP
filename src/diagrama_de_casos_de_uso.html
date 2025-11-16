@@ -5,10 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Diagrama de Casos de Uso</title>
-
-  <!-- Meta descrição para SEO -->
-  <meta name="description" content="Página dedicada a informações do futuro software IFP">
+  <title>Diagrama de Casos de Uso - IFP</title>
 
   <!-- CSS do Bootstrap -->
   <link rel="stylesheet"
@@ -16,143 +13,514 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
 
-<!-- CSS customizado para o rodapé ficar fixo embaixo -->
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- CSS customizado -->
   <style>
     html, body {
       height: 100%;
       margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
       display: flex;
       flex-direction: column;
-      background-color: #f0f0f0;
-      font-family: sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
     }
 
     main {
       flex: 1;
+      padding: 20px 0;
+    }
+
+    .breadcrumb {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 0;
+      margin-bottom: 0;
+      padding: 10px 15px;
+    }
+
+    .diagram-container {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      margin: 20px auto;
+      max-width: 1400px;
+    }
+
+    .page-title {
+      color: #00258b;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .page-title:after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, #007bff, #00258b);
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+
+    /* Sistema de Grid para o Diagrama */
+    .diagram-grid {
+      display: grid;
+      grid-template-columns: 1fr 3fr 1fr;
+      grid-template-rows: auto;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .actor-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .system-column {
+      border: 2px dashed #6c757d;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: rgba(248, 249, 250, 0.7);
+      min-height: 500px;
+    }
+
+    .system-title {
+      text-align: center;
+      font-weight: bold;
+      color: #6c757d;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .use-case-card {
+      background-color: #f8f9fa;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .use-case-card:hover {
+      background-color: #e9ecef;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .actor-card {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .actor-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .actor-name {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    /* Cores dos atores */
+    .admin-color {
+      color: #dc3545;
+      border-left: 4px solid #dc3545;
+    }
+
+    .professor-color {
+      color: #007bff;
+      border-left: 4px solid #007bff;
+    }
+
+    .aluno-color {
+      color: #28a745;
+      border-left: 4px solid #28a745;
+    }
+
+    .usuario-color {
+      color: #6f42c1;
+      border-left: 4px solid #6f42c1;
+    }
+
+    /* Painel de detalhes */
+    .details-panel {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+      display: none;
+      border-top: 3px solid #007bff;
+    }
+
+    .details-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .details-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #00258b;
+      margin: 0;
+    }
+
+    .close-details {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #6c757d;
+      cursor: pointer;
+    }
+
+    .details-content {
+      line-height: 1.6;
+    }
+
+    .use-case-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .use-case-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    .use-case-list li:last-child {
+      border-bottom: none;
+    }
+
+    .use-case-list li i {
+      color: #28a745;
+      margin-right: 8px;
+    }
+
+    /* Animações */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    /* Legenda */
+    .legend {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(248, 249, 250, 0.8);
+      border-radius: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    /* Responsividade */
+    @media (max-width: 992px) {
+      .diagram-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      
+      .actor-column {
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
+      
+      .actor-card {
+        margin: 10px;
+        max-width: 150px;
+      }
     }
   </style>
-
 </head>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const links = document.querySelectorAll(".navbar-nav .nav-link");
-    const currentPage = window.location.pathname.split("/").pop();
-
-    links.forEach(link => {
-      const linkPage = link.getAttribute("href");
-      if (linkPage === currentPage) {
-        link.classList.add("active");
-      }
-    });
-  });
-</script>
-
-
 <body>
-  
-
   <!-- Barra de navegação -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom shadow-lg">
-
-      <div class="container">
-
-          <a class="navbar-brand d-flex align-items-center" href="home.html">
-
-              <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
-              <strong>IFP</strong>
-
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-
-              <span class="navbar-toggler-icon"></span>
-
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarNav">
-
-              <ul class="navbar-nav ml-auto">
-
-                  <li class="nav-item mx-1">
-
-                      <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
-                      
-                  </li>
-                  
-                  <li class="nav-item dropdown mx-1">
-
-                      <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
-                        href="#" data-toggle="dropdown">
-                          📋 Docs
-                      </a>
-
-                      <div class="dropdown-menu">
-
-                          <h6 class="dropdown-header">Documentação</h6>
-                          <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
-                          <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
-                          <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
-                          <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
-
-                      </div>
-
-                  </li>
-                  
-                  <li class="nav-item dropdown mx-1">
-                      <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
-                        href="#" data-toggle="dropdown">
-                          📊 Diagramas
-                      </a>
-                      <div class="dropdown-menu">
-                          <h6 class="dropdown-header">Modelos Visuais</h6>
-                          <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
-                          <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
-                      </div>
-                  </li>
-
-              </ul>
-          </div>
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="home.html">
+        <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
+        <strong>IFP</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-1">
+            <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
+          </li>
+          <li class="nav-item dropdown mx-1">
+            <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
+              href="#" data-toggle="dropdown">
+                📋 Docs
+            </a>
+            <div class="dropdown-menu">
+              <h6 class="dropdown-header">Documentação</h6>
+              <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
+              <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
+              <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
+              <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown mx-1">
+            <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
+              href="#" data-toggle="dropdown">
+                📊 Diagramas
+            </a>
+            <div class="dropdown-menu">
+              <h6 class="dropdown-header">Modelos Visuais</h6>
+              <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
+              <a class="dropdown-item active" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
+            </div>
+          </li>
+        </ul>
       </div>
+    </div>
   </nav>
 
   <!-- Breadcrumb -->
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page"><h5><strong>Diagrama de Casos de Uso</strong></h5></li>
+      <li class="breadcrumb-item"><a href="home.html">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Diagramas</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><strong>Diagrama de Casos de Uso</strong></li>
     </ol>
   </nav>
 
-  <!-- Conteúdo diagrama de casos de uso-->
-  <main class="container my-5">
-    <h1 class="text-center mb-4">Bem-vindo(a)!</h1>
-   
-    <h1 class="text-center mb-4">Olá, eu sou Viviane! 👋</h1>
-    <p class="text-center lead">
-      Sou professora e entusiasta da tecnologia, apaixonada por educação e inovação.
-      Nesta página, compartilho um pouco sobre minha trajetória acadêmica e profissional.
-    </p>
-  </section>
-</main>
-
+  <!-- Conteúdo principal -->
+  <main>
+    <div class="container">
+      <h1 class="page-title">Diagrama de Casos de Uso - Sistema IFP</h1>
+      
+      <div class="diagram-container fade-in">
+        <!-- Sistema de Grid para o Diagrama -->
+        <div class="diagram-grid">
+          <!-- Coluna Esquerda - Atores -->
+          <div class="actor-column">
+            <div class="actor-card admin-color">
+              <i class="actor-icon fas fa-user-shield"></i>
+              <div class="actor-name">Administrador</div>
+            </div>
+            
+            <div class="actor-card aluno-color">
+              <i class="actor-icon fas fa-user-graduate"></i>
+              <div class="actor-name">Aluno</div>
+            </div>
+          </div>
+          
+          <!-- Coluna Central - Sistema e Casos de Uso -->
+          <div class="system-column">
+            <div class="system-title">Sistema IFP</div>
+            
+            <div class="use-cases-grid">
+              <!-- Casos de Uso do Administrador -->
+              <div class="use-case-card admin-color" data-uc="cadastrar-docentes">
+                Cadastrar Docentes
+              </div>
+              <div class="use-case-card admin-color" data-uc="gerenciar-docentes">
+                Gerenciar Docentes
+              </div>
+              <div class="use-case-card admin-color" data-uc="gerenciar-turmas">
+                Gerenciar Turmas
+              </div>
+              <div class="use-case-card admin-color" data-uc="acompanhar-presencas">
+                Acompanhar Presenças
+              </div>
+              
+              <!-- Casos de Uso do Professor -->
+              <div class="use-case-card professor-color" data-uc="login-professor">
+                Login (Biometria)
+              </div>
+              <div class="use-case-card professor-color" data-uc="marcar-presenca">
+                Marcar Presença
+              </div>
+              <div class="use-case-card professor-color" data-uc="aceitar-localizacao">
+                Aceitar Localização
+              </div>
+              <div class="use-case-card professor-color" data-uc="enviar-notificacoes">
+                Enviar Notificações
+              </div>
+              
+              <!-- Casos de Uso do Aluno -->
+              <div class="use-case-card aluno-color" data-uc="instalar-app">
+                Instalar Aplicativo
+              </div>
+              <div class="use-case-card aluno-color" data-uc="cadastrar-aluno">
+                Cadastrar no Sistema
+              </div>
+              <div class="use-case-card aluno-color" data-uc="inscrever-turmas">
+                Inscrever em Turmas
+              </div>
+              <div class="use-case-card aluno-color" data-uc="receber-notificacoes">
+                Receber Notificações
+              </div>
+              
+              <!-- Casos de Uso do Usuário -->
+              <div class="use-case-card usuario-color" data-uc="login">
+                Login
+              </div>
+              <div class="use-case-card usuario-color" data-uc="ver-localizacao">
+                Ver Localização
+              </div>
+              <div class="use-case-card usuario-color" data-uc="ver-turma">
+                Ver Turma
+              </div>
+              <div class="use-case-card usuario-color" data-uc="ver-mensagens">
+                Ver Mensagens
+              </div>
+              <div class="use-case-card usuario-color" data-uc="mandar-mensagens">
+                Mandar Mensagens
+              </div>
+              <div class="use-case-card usuario-color" data-uc="ver-horarios">
+                Ver Horários
+              </div>
+              <div class="use-case-card usuario-color" data-uc="adicionar-localizacao">
+                Adicionar Localização
+              </div>
+              <div class="use-case-card usuario-color" data-uc="enviar-solicitacao">
+                Solicitar Localização
+              </div>
+            </div>
+          </div>
+          
+          <!-- Coluna Direita - Atores -->
+          <div class="actor-column">
+            <div class="actor-card professor-color">
+              <i class="actor-icon fas fa-chalkboard-teacher"></i>
+              <div class="actor-name">Professor</div>
+            </div>
+            
+            <div class="actor-card usuario-color">
+              <i class="actor-icon fas fa-user"></i>
+              <div class="actor-name">Usuário</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Legenda -->
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #dc3545;"></div>
+            <span>Administrador</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #007bff;"></div>
+            <span>Professor</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #28a745;"></div>
+            <span>Aluno</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #6f42c1;"></div>
+            <span>Usuário</span>
+          </div>
+        </div>
+        
+        <!-- Painel de detalhes -->
+        <div class="details-panel" id="detailsPanel">
+          <div class="details-header">
+            <h3 class="details-title" id="detailsTitle">Detalhes do Caso de Uso</h3>
+            <button class="close-details" id="closeDetails">&times;</button>
+          </div>
+          <div class="details-content" id="detailsContent">
+            <!-- Conteúdo será preenchido dinamicamente -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Informações sobre o diagrama -->
+      <div class="row mt-4">
+        <div class="col-md-10 mx-auto">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0"><i class="fas fa-info-circle mr-2"></i>Sobre este Diagrama</h5>
+            </div>
+            <div class="card-body">
+              <p>Este diagrama de casos de uso representa todas as funcionalidades do sistema IFP baseadas nos critérios de aceitação documentados.</p>
+              <p><strong>Clique em qualquer caso de uso para ver detalhes específicos.</strong></p>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <h6>Atores do Sistema:</h6>
+                  <ul class="list-unstyled">
+                    <li><i class="fas fa-user-shield admin-color mr-2"></i>Administrador - Gerencia o sistema</li>
+                    <li><i class="fas fa-chalkboard-teacher professor-color mr-2"></i>Professor - Usuário com privilégios de ensino</li>
+                    <li><i class="fas fa-user-graduate aluno-color mr-2"></i>Aluno - Usuário que consome conteúdo</li>
+                    <li><i class="fas fa-user usuario-color mr-2"></i>Usuário - Papel genérico para funcionalidades comuns</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <h6>Como usar:</h6>
+                  <ul>
+                    <li>Clique em um caso de uso para ver detalhes completos</li>
+                    <li>Cada cor representa um ator diferente</li>
+                    <li>Use o botão X para fechar os detalhes</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- Rodapé -->
-
-<footer class="bg-dark text-white text-center py-3 mt-auto">
-
-  <div class="container">
-
-    <h5 class="mb-0">&copy; 2025 IFP</h5>
-
-  </div>
-
-</footer>
-
-
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <div class="container">
+      <h5 class="mb-0">&copy; 2025 IFP - Sistema de Gestão Acadêmica</h5>
+    </div>
+  </footer>
 
   <!-- Scripts do Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -165,5 +533,292 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
+  <!-- JavaScript customizado -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Dados dos casos de uso
+      const useCases = {
+        "cadastrar-docentes": {
+          title: "Cadastrar Docentes",
+          actor: "Administrador",
+          description: "Permite ao administrador cadastrar novos docentes no sistema com dados pessoais e biométricos.",
+          details: [
+            "Inserir dados pessoais do docente",
+            "Registrar digitais para autenticação biométrica",
+            "Vincular docente às disciplinas e turmas",
+            "Definir permissões de acesso"
+          ]
+        },
+        "gerenciar-docentes": {
+          title: "Gerenciar Docentes",
+          actor: "Administrador",
+          description: "Permite ao administrador atualizar e gerenciar informações dos docentes cadastrados.",
+          details: [
+            "Editar dados pessoais dos docentes",
+            "Atualizar digitais cadastradas",
+            "Reativar/desativar contas de docentes",
+            "Visualizar histórico de atividades"
+          ]
+        },
+        "gerenciar-turmas": {
+          title: "Gerenciar Turmas",
+          actor: "Administrador",
+          description: "Permite ao administrador criar, editar e gerenciar turmas do sistema.",
+          details: [
+            "Criar novas turmas com horários e locais",
+            "Vincular docentes às turmas",
+            "Definir capacidade de alunos por turma",
+            "Remover ou arquivar turmas"
+          ]
+        },
+        "acompanhar-presencas": {
+          title: "Acompanhar Presenças",
+          actor: "Administrador",
+          description: "Permite ao administrador visualizar e gerar relatórios de presença dos docentes.",
+          details: [
+            "Visualizar registros de presença com data e horário",
+            "Gerar relatórios em PDF e planilhas",
+            "Filtrar por período específico",
+            "Exportar dados para análise"
+          ]
+        },
+        "login-professor": {
+          title: "Login (Biometria/Senha)",
+          actor: "Professor",
+          description: "Permite ao professor acessar o sistema através de autenticação biométrica ou por senha.",
+          details: [
+            "Autenticação por leitura biométrica",
+            "Login alternativo com senha",
+            "Recuperação de senha em caso de esquecimento",
+            "Manter sessão ativa conforme configurações"
+          ]
+        },
+        "marcar-presenca": {
+          title: "Marcar Presença",
+          actor: "Professor",
+          description: "Permite ao professor registrar sua presença no sistema através de biometria.",
+          details: [
+            "Registro de presença por leitura biométrica",
+            "Confirmação visual do registro bem-sucedido",
+            "Tratamento de erros em caso de digital não reconhecida",
+            "Registro de data e horário automáticos"
+          ]
+        },
+        "aceitar-localizacao": {
+          title: "Aceitar Localização",
+          actor: "Professor",
+          description: "Permite ao professor aceitar o compartilhamento de sua localização no campus.",
+          details: [
+            "Configurar preferências de compartilhamento",
+            "Definir períodos para compartilhamento automático",
+            "Aceitar/rejeitar solicitações específicas",
+            "Visualizar quem tem acesso à localização"
+          ]
+        },
+        "enviar-notificacoes": {
+          title: "Enviar Notificações",
+          actor: "Professor",
+          description: "Permite ao professor enviar notificações para as turmas cadastradas.",
+          details: [
+            "Selecionar turmas destinatárias",
+            "Compor mensagens de notificação",
+            "Envio em tempo real para os alunos",
+            "Confirmação de entrega das notificações"
+          ]
+        },
+        "instalar-app": {
+          title: "Instalar Aplicativo",
+          actor: "Aluno",
+          description: "Permite ao aluno instalar o aplicativo IFP em seu dispositivo móvel.",
+          details: [
+            "Download via Google Play Store (Android)",
+            "Download via Apple App Store (iOS)",
+            "Instalação e configuração inicial",
+            "Verificação de compatibilidade do dispositivo"
+          ]
+        },
+        "cadastrar-aluno": {
+          title: "Cadastrar no Sistema",
+          actor: "Aluno",
+          description: "Permite ao aluno criar sua conta no sistema IFP.",
+          details: [
+            "Preenchimento de dados pessoais",
+            "Criação de credenciais de acesso",
+            "Validação de email ou telefone",
+            "Confirmação do cadastro"
+          ]
+        },
+        "inscrever-turmas": {
+          title: "Inscrever em Turmas",
+          actor: "Aluno",
+          description: "Permite ao aluno inscrever-se nas turmas disponíveis no sistema.",
+          details: [
+            "Visualização de turmas disponíveis",
+            "Filtragem por disciplina ou horário",
+            "Inscrição em turmas específicas",
+            "Confirmação de vínculo com a turma"
+          ]
+        },
+        "receber-notificacoes": {
+          title: "Receber Notificações",
+          actor: "Aluno",
+          description: "Permite ao aluno receber notificações das turmas em que está inscrito.",
+          details: [
+            "Recebimento em tempo real de notificações",
+            "Visualização no aplicativo móvel",
+            "Filtragem por prioridade ou turma",
+            "Configuração de preferências de notificação"
+          ]
+        },
+        "login": {
+          title: "Login",
+          actor: "Usuário",
+          description: "Permite ao usuário autenticar-se no sistema IFP.",
+          details: [
+            "Autenticação com credenciais válidas",
+            "Recuperação de conta em caso de esquecimento",
+            "Manutenção de sessão segura",
+            "Logout seguro do sistema"
+          ]
+        },
+        "ver-localizacao": {
+          title: "Ver Localização dos Professores",
+          actor: "Usuário",
+          description: "Permite visualizar a localização atual dos professores no campus.",
+          details: [
+            "Visualização em mapa do campus",
+            "Filtro por professor específico",
+            "Atualização em tempo real",
+            "Indicação de disponibilidade"
+          ]
+        },
+        "ver-turma": {
+          title: "Ver Turma",
+          actor: "Usuário",
+          description: "Permite visualizar informações detalhadas sobre as turmas.",
+          details: [
+            "Listagem de todas as turmas",
+            "Detalhes de horários e locais",
+            "Informações sobre professores e alunos",
+            "Calendário de atividades da turma"
+          ]
+        },
+        "ver-mensagens": {
+          title: "Ver Mensagens",
+          actor: "Usuário",
+          description: "Permite visualizar mensagens recebidas e enviadas no sistema.",
+          details: [
+            "Acesso à caixa de entrada",
+            "Organização por turma ou remetente",
+            "Marcação de mensagens como lidas",
+            "Busca e filtro de mensagens"
+          ]
+        },
+        "mandar-mensagens": {
+          title: "Mandar Mensagens",
+          actor: "Usuário",
+          description: "Permite enviar mensagens para outros usuários do sistema.",
+          details: [
+            "Composição de novas mensagens",
+            "Seleção de destinatários",
+            "Anexação de arquivos",
+            "Confirmação de envio"
+          ]
+        },
+        "ver-horarios": {
+          title: "Ver Horários dos Professores",
+          actor: "Usuário",
+          description: "Permite consultar os horários de disponibilidade dos professores.",
+          details: [
+            "Visualização de agenda semanal",
+            "Horários de aula e atendimento",
+            "Indicação de disponibilidade",
+            "Integração com calendário pessoal"
+          ]
+        },
+        "adicionar-localizacao": {
+          title: "Adicionar Localização",
+          actor: "Usuário",
+          description: "Permite ao usuário adicionar ou atualizar manualmente sua localização.",
+          details: [
+            "Inserção manual da localização",
+            "Seleção no mapa interativo",
+            "Atualização da localização atual",
+            "Definição de localização padrão"
+          ]
+        },
+        "enviar-solicitacao": {
+          title: "Enviar Solicitação de Localização",
+          actor: "Usuário",
+          description: "Permite solicitar a localização de um docente específico.",
+          details: [
+            "Seleção do docente desejado",
+            "Envio da solicitação de localização",
+            "Acompanhamento do status da solicitação",
+            "Recebimento da localização quando disponível"
+          ]
+        }
+      };
+
+      // Elementos do DOM
+      const detailsPanel = document.getElementById('detailsPanel');
+      const detailsTitle = document.getElementById('detailsTitle');
+      const detailsContent = document.getElementById('detailsContent');
+      const closeDetails = document.getElementById('closeDetails');
+      const useCaseCards = document.querySelectorAll('.use-case-card');
+
+      // Adicionar event listeners para os casos de uso
+      useCaseCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const useCaseId = this.getAttribute('data-uc');
+          showUseCaseDetails(useCaseId);
+        });
+      });
+
+      // Adicionar event listener para o botão de fechar
+      closeDetails.addEventListener('click', function() {
+        detailsPanel.style.display = 'none';
+      });
+
+      // Função para mostrar detalhes do caso de uso
+      function showUseCaseDetails(useCaseId) {
+        const useCase = useCases[useCaseId];
+        
+        if (useCase) {
+          detailsTitle.textContent = useCase.title;
+          
+          let detailsHTML = `
+            <p><strong>Ator:</strong> ${useCase.actor}</p>
+            <p><strong>Descrição:</strong> ${useCase.description}</p>
+            <h6>Funcionalidades Principais:</h6>
+            <ul class="use-case-list">
+          `;
+          
+          useCase.details.forEach(detail => {
+            detailsHTML += `<li><i class="fas fa-check"></i> ${detail}</li>`;
+          });
+          
+          detailsHTML += `</ul>`;
+          
+          detailsContent.innerHTML = detailsHTML;
+          detailsPanel.style.display = 'block';
+          
+          // Scroll suave para o painel de detalhes
+          detailsPanel.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      // Ativar link atual na navegação
+      const links = document.querySelectorAll(".navbar-nav .nav-link");
+      const currentPage = window.location.pathname.split("/").pop();
+
+      links.forEach(link => {
+        const linkPage = link.getAttribute("href");
+        if (linkPage === currentPage) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
