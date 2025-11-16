@@ -8,7 +8,7 @@
   <title>Requisitos</title>
 
   <!-- Meta descrição para SEO -->
-  <meta name="description" content="Página dedicada a informações do futuro software IFP">
+  <meta name="description" content="Requisitos funcionais e não funcionais do sistema IFP">
 
   <!-- CSS do Bootstrap -->
   <link rel="stylesheet"
@@ -16,7 +16,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
 
-<!-- CSS customizado para o rodapé ficar fixo embaixo -->
+  <!-- CSS customizado -->
   <style>
     html, body {
       height: 100%;
@@ -26,95 +26,88 @@
     body {
       display: flex;
       flex-direction: column;
+      background-color: #f0f0f0;
+      font-family: sans-serif;
     }
 
     main {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .content-container {
+      max-width: 90%;
+      color: rgb(0, 37, 139);
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    .requisitos-img {
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Manter o breadcrumb visível */
+    .breadcrumb {
+      background-color: transparent;
+      margin-bottom: 0;
     }
   </style>
-
 </head>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const links = document.querySelectorAll(".navbar-nav .nav-link");
-    const currentPage = window.location.pathname.split("/").pop();
-
-    links.forEach(link => {
-      const linkPage = link.getAttribute("href");
-      if (linkPage === currentPage) {
-        link.classList.add("active");
-      }
-    });
-  });
-</script>
-
-
 <body>
-  
-
   <!-- Barra de navegação -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom shadow-lg">
-
-      <div class="container">
-
-          <a class="navbar-brand d-flex align-items-center" href="home.html">
-
-              <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
-              <strong>IFP</strong>
-
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-
-              <span class="navbar-toggler-icon"></span>
-
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarNav">
-
-              <ul class="navbar-nav ml-auto">
-
-                  <li class="nav-item mx-1">
-
-                      <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
-                      
-                  </li>
-                  
-                  <li class="nav-item dropdown mx-1">
-
-                      <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
-                        href="#" data-toggle="dropdown">
-                          📋 Docs
-                      </a>
-
-                      <div class="dropdown-menu">
-
-                          <h6 class="dropdown-header">Documentação</h6>
-                          <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
-                          <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
-                          <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
-                          <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
-
-                      </div>
-
-                  </li>
-                  
-                  <li class="nav-item dropdown mx-1">
-                      <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
-                        href="#" data-toggle="dropdown">
-                          📊 Diagramas
-                      </a>
-                      <div class="dropdown-menu">
-                          <h6 class="dropdown-header">Modelos Visuais</h6>
-                          <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
-                          <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
-                      </div>
-                  </li>
-
-              </ul>
-          </div>
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="home.html">
+        <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
+        <strong>IFP</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-1">
+            <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
+          </li>
+          <li class="nav-item dropdown mx-1">
+            <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
+              href="#" data-toggle="dropdown">
+                📋 Docs
+            </a>
+            <div class="dropdown-menu">
+              <h6 class="dropdown-header">Documentação</h6>
+              <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
+              <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
+              <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
+              <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown mx-1">
+            <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
+              href="#" data-toggle="dropdown">
+                📊 Diagramas
+            </a>
+            <div class="dropdown-menu">
+              <h6 class="dropdown-header">Modelos Visuais</h6>
+              <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
+              <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
+            </div>
+          </li>
+        </ul>
       </div>
+    </div>
   </nav>
 
   <!-- Breadcrumb -->
@@ -124,33 +117,20 @@
     </ol>
   </nav>
 
-  <!-- Conteúdo principal  (main)-->
-  <main class="container my-5">
-    <h1 class="text-center mb-4">Bem-vindo(a)!</h1>
-   
-    <h1 class="text-center mb-4">Olá, eu sou Viviane! 👋</h1>
-    <p class="text-center lead">
-      Sou professora e entusiasta da tecnologia, apaixonada por educação e inovação.
-      Nesta página, compartilho um pouco sobre minha trajetória acadêmica e profissional.
-    </p>
-  </section>
-</main>
-
+  <!-- Conteúdo principal com imagem centralizada -->
+  <main>
+    <div class="content-container">
+      <h1>Requisitos funcionais e não funcionais</h1>
+      <img src="/assets/requisitos.png" alt="Requisitos do sistema IFP" class="requisitos-img">
+    </div>
   </main>
 
   <!-- Rodapé -->
-
-<footer class="bg-dark text-white text-center py-3 mt-auto">
-
-  <div class="container">
-
-    <h5 class="mb-0">&copy; 2025 IFP</h5>
-
-  </div>
-
-</footer>
-
-
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <div class="container">
+      <h5 class="mb-0">&copy; 2025 IFP</h5>
+    </div>
+  </footer>
 
   <!-- Scripts do Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -163,5 +143,18 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const links = document.querySelectorAll(".navbar-nav .nav-link");
+      const currentPage = window.location.pathname.split("/").pop();
+
+      links.forEach(link => {
+        const linkPage = link.getAttribute("href");
+        if (linkPage === currentPage) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
