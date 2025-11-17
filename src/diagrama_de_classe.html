@@ -21,6 +21,7 @@
     html, body {
       height: 100%;
       margin: 0;
+      overflow-x: hidden;
     }
 
     body {
@@ -36,7 +37,7 @@
     }
 
     .content-container {
-      max-width: 1400px;
+      max-width: 95vw;
       margin: 0 auto;
     }
 
@@ -47,21 +48,102 @@
       text-align: center;
     }
 
-    /* Container da imagem */
+    /* Container da imagem - AMPLIADO */
+    .image-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
     .image-container {
       background: white;
       border-radius: 10px;
-      padding: 40px;
+      padding: 30px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
       text-align: center;
+      width: 100%;
+      max-width: 1800px;
+      overflow: hidden;
+      position: relative;
+      cursor: grab;
+    }
+
+    .image-container:active {
+      cursor: grabbing;
     }
 
     .diagram-image {
-      max-width: 100%;
+      width: auto;
+      max-width: none;
       height: auto;
-      border-radius: 8px;
+      max-height: 80vh;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.1s ease;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* Controles de zoom e navegação */
+    .controls {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .control-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #007bff;
+      color: white;
+      border: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .control-btn:hover {
+      background: #0056b3;
+      transform: scale(1.1);
+    }
+
+    .control-btn.reset {
+      background: #6c757d;
+    }
+
+    .control-btn.reset:hover {
+      background: #545b62;
+    }
+
+    /* Indicador de navegação */
+    .navigation-hint {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      z-index: 10;
+      animation: fadeOut 3s ease-in-out 2s forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
     }
 
     .image-placeholder {
@@ -97,7 +179,8 @@
     /* Responsividade */
     @media (max-width: 768px) {
       .image-container {
-        padding: 20px;
+        padding: 15px;
+        max-width: 95vw;
       }
       
       .image-placeholder {
@@ -107,6 +190,46 @@
       .image-placeholder i {
         font-size: 3rem;
       }
+
+      .controls {
+        bottom: 80px;
+        right: 15px;
+      }
+
+      .control-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+      }
+
+      .navigation-hint {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content-container {
+        max-width: 100vw;
+        padding: 0 10px;
+      }
+
+      .image-container {
+        padding: 10px;
+      }
+    }
+
+    /* Estados de arraste */
+    .dragging {
+      cursor: grabbing !important;
+    }
+
+    .grabbable {
+      cursor: grab;
+    }
+
+    .grabbable:active {
+      cursor: grabbing;
     }
   </style>
 </head>
@@ -168,19 +291,30 @@
     <div class="content-container">
       <h1>Diagrama de Classes</h1>
       
-      <div class="image-container">
-        <!-- Substitua o src pela URL da sua imagem -->
-        <img src="/assets/diagrama_de_classes.png" alt="Diagrama de Classes do Sistema" class="diagram-image">
-        
-        <!-- Placeholder que será substituído pela imagem -->
-        <!--
-        <div class="image-placeholder">
-          <i class="fas fa-project-diagram"></i>
-          <h3>Diagrama de Classes</h3>
-          <p>Imagem do diagrama será carregada aqui</p>
-          <p class="small">Substitua este placeholder pela imagem "diagrama_de_classes.png"</p>
+      <!-- Wrapper para centralizar a imagem -->
+      <div class="image-wrapper">
+        <div class="image-container" id="imageContainer">
+          <!-- Indicador de navegação -->
+          <div class="navigation-hint">
+            <i class="fas fa-arrows-alt mr-2"></i>Arraste para navegar
+          </div>
+          
+          <!-- Substitua o src pela URL da sua imagem -->
+          <img src="/assets/diagrama_de_classes.webp" alt="Diagrama de Classes do Sistema" class="diagram-image grabbable" id="diagramImage">
         </div>
-        -->
+      </div>
+
+      <!-- Controles de zoom e navegação -->
+      <div class="controls">
+        <button class="control-btn" onclick="zoomIn()" title="Zoom In">
+          <i class="fas fa-search-plus"></i>
+        </button>
+        <button class="control-btn" onclick="zoomOut()" title="Zoom Out">
+          <i class="fas fa-search-minus"></i>
+        </button>
+        <button class="control-btn reset" onclick="resetView()" title="Resetar Visualização">
+          <i class="fas fa-sync-alt"></i>
+        </button>
       </div>
 
       <!-- Informações sobre o diagrama -->
@@ -190,8 +324,8 @@
             <div class="card-body text-center">
               <h5 class="card-title">Sobre o Diagrama</h5>
               <p class="card-text">
-                Este diagrama representa a estrutura de classes do sistema IFP, mostrando os principais componentes, 
-                seus atributos, métodos e relacionamentos.
+                Este diagrama representa a estrutura de classes do sistema IFP. Use os controles para zoom e 
+                <strong>arraste com o cursor</strong> para navegar pela imagem quando estiver ampliada.
               </p>
               <div class="row text-muted small">
                 <div class="col-md-4">
@@ -231,6 +365,104 @@
 
   <!-- JavaScript customizado -->
   <script>
+    let currentScale = 1;
+    let currentX = 0;
+    let currentY = 0;
+    let isDragging = false;
+    let startX, startY;
+    
+    const diagramImage = document.getElementById('diagramImage');
+    const imageContainer = document.getElementById('imageContainer');
+
+    // Sistema de Zoom
+    function zoomIn() {
+      currentScale += 0.2;
+      updateView();
+    }
+
+    function zoomOut() {
+      if (currentScale > 0.4) {
+        currentScale -= 0.2;
+        updateView();
+      }
+    }
+
+    function resetView() {
+      currentScale = 1;
+      currentX = 0;
+      currentY = 0;
+      updateView();
+    }
+
+    function updateView() {
+      diagramImage.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+    }
+
+    // Sistema de Arraste
+    function startDrag(e) {
+      if (currentScale <= 1) return; // Só permite arraste quando zoom > 1
+      
+      isDragging = true;
+      imageContainer.classList.add('dragging');
+      
+      // Define o ponto inicial baseado no tipo de evento (mouse ou touch)
+      if (e.type === 'mousedown') {
+        startX = e.clientX - currentX;
+        startY = e.clientY - currentY;
+      } else if (e.type === 'touchstart') {
+        const touch = e.touches[0];
+        startX = touch.clientX - currentX;
+        startY = touch.clientY - currentY;
+      }
+      
+      e.preventDefault();
+    }
+
+    function doDrag(e) {
+      if (!isDragging) return;
+      
+      let clientX, clientY;
+      
+      if (e.type === 'mousemove') {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      } else if (e.type === 'touchmove') {
+        const touch = e.touches[0];
+        clientX = touch.clientX;
+        clientY = touch.clientY;
+      }
+      
+      currentX = clientX - startX;
+      currentY = clientY - startY;
+      
+      updateView();
+    }
+
+    function stopDrag() {
+      isDragging = false;
+      imageContainer.classList.remove('dragging');
+    }
+
+    // Event Listeners para Mouse
+    diagramImage.addEventListener('mousedown', startDrag);
+    document.addEventListener('mousemove', doDrag);
+    document.addEventListener('mouseup', stopDrag);
+
+    // Event Listeners para Touch (mobile)
+    diagramImage.addEventListener('touchstart', startDrag, { passive: false });
+    document.addEventListener('touchmove', doDrag, { passive: false });
+    document.addEventListener('touchend', stopDrag);
+
+    // Zoom com scroll do mouse
+    diagramImage.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      if (e.deltaY < 0) {
+        zoomIn();
+      } else {
+        zoomOut();
+      }
+    });
+
     // Inicialização quando o DOM estiver carregado
     document.addEventListener('DOMContentLoaded', function() {
       // Ativar link atual na navegação
@@ -243,6 +475,11 @@
           link.classList.add("active");
         }
       });
+
+      // Focar na imagem após carregamento
+      setTimeout(() => {
+        diagramImage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
     });
   </script>
 </body>
