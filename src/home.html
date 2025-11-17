@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Home</title>
+  <title>Home - IFP</title>
 
   <!-- Meta descrição para SEO -->
   <meta name="description" content="Página dedicada a informações do futuro software IFP">
@@ -16,7 +16,10 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
 
-<!-- CSS customizado para o rodapé ficar fixo embaixo -->
+  <!-- Ícones do Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- CSS customizado -->
   <style>
     html, body {
       height: 100%;
@@ -26,182 +29,337 @@
     body {
       display: flex;
       flex-direction: column;
-      background-color: #f0f0f0;
-      font-family: sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     main {
       flex: 1;
+      padding: 20px;
+    }
+
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header estilizado */
+    .welcome-header {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 50px 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .welcome-header h1 {
+      color: #2c3e50;
+      font-weight: 700;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+    }
+
+    .welcome-header .lead {
+      color: #5a6c7d;
+      font-size: 1.3rem;
+      margin-bottom: 0;
+    }
+
+    /* Botões reformulados */
+    .feature-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+
+    .feature-btn {
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 15px;
+      padding: 25px;
+      text-decoration: none;
+      color: #2c3e50;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+    }
+
+    .feature-btn:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      text-decoration: none;
+      color: #2c3e50;
+      background: white;
+    }
+
+    .btn-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .btn-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .btn-subtitle {
+      font-size: 0.9rem;
+      color: #6c757d;
+      opacity: 0.8;
+    }
+
+    /* Cards de informações */
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .info-card h3 {
+      color: #2c3e50;
+      font-weight: 600;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .info-card h3 i {
+      margin-right: 10px;
+      color: #667eea;
+    }
+
+    .info-card p {
+      color: #5a6c7d;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      background-color: transparent;
+      margin-bottom: 0;
+    }
+
+    .breadcrumb-item a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+      color: white;
+      font-weight: 600;
+    }
+
+    /* Animações */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .welcome-header, .feature-btn, .info-card {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .feature-btn:nth-child(1) { animation-delay: 0.1s; }
+    .feature-btn:nth-child(2) { animation-delay: 0.2s; }
+    .feature-btn:nth-child(3) { animation-delay: 0.3s; }
+    .feature-btn:nth-child(4) { animation-delay: 0.4s; }
+    .feature-btn:nth-child(5) { animation-delay: 0.5s; }
+    .feature-btn:nth-child(6) { animation-delay: 0.6s; }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .welcome-header {
+        padding: 30px 20px;
+        margin-bottom: 30px;
+      }
+      
+      .welcome-header h1 {
+        font-size: 2rem;
+      }
+      
+      .feature-buttons {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .info-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .feature-btn {
+        min-height: 120px;
+        padding: 20px;
+      }
     }
   </style>
-
 </head>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const links = document.querySelectorAll(".navbar-nav .nav-link");
-    const currentPage = window.location.pathname.split("/").pop();
-
-    links.forEach(link => {
-      const linkPage = link.getAttribute("href");
-      if (linkPage === currentPage) {
-        link.classList.add("active");
-      }
-    });
-  });
-</script>
-
-
 <body>
-  
-
   <!-- Barra de navegação -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom shadow-lg">
-
-      <div class="container">
-
-          <a class="navbar-brand d-flex align-items-center" href="home.html">
-
-              <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
-              <strong>IFP</strong>
-
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-
-              <span class="navbar-toggler-icon"></span>
-
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarNav">
-
-              <ul class="navbar-nav ml-auto">
-
-                  <li class="nav-item mx-1">
-
-                      <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
-                      
-                  </li>
-                  
-                  <li class="nav-item dropdown mx-1">
-
-                      <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
-                        href="#" data-toggle="dropdown">
-                          📋 Docs
-                      </a>
-
-                      <div class="dropdown-menu">
-
-                          <h6 class="dropdown-header">Documentação</h6>
-                          <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
-                          <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
-                          <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
-                          <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
-
-                      </div>
-
-                  </li>
-                  
-                  <li class="nav-item dropdown mx-1">
-                      <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
-                        href="#" data-toggle="dropdown">
-                          📊 Diagramas
-                      </a>
-                      <div class="dropdown-menu">
-                          <h6 class="dropdown-header">Modelos Visuais</h6>
-                          <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
-                          <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
-                      </div>
-                  </li>
-
-              </ul>
-          </div>
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="home.html">
+        <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
+        <strong>IFP</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-1">
+            <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
+          </li>
+          <li class="nav-item dropdown mx-1">
+            <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
+              href="#" data-toggle="dropdown">
+                📋 Docs
+            </a>
+            <div class="dropdown-menu">
+              <h6 class="dropdown-header">Documentação</h6>
+              <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
+              <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
+              <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
+              <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown mx-1">
+            <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
+              href="#" data-toggle="dropdown">
+                📊 Diagramas
+            </a>
+            <div class="dropdown-menu">
+              <h6 class="dropdown-header">Modelos Visuais</h6>
+              <a class="dropdown-item" href="diagrama_de_classe.html">🔄 Classes</a>
+              <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
+            </div>
+          </li>
+        </ul>
       </div>
+    </div>
   </nav>
 
   <!-- Breadcrumb -->
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page"><h5><strong>Home</strong></h5></li>
+      <li class="breadcrumb-item active" aria-current="page"><strong>Home</strong></li>
     </ol>
   </nav>
 
-  <!-- Conteúdo home-->
- <main class="container my-5">
+  <!-- Conteúdo home -->
+  <main>
+    <div class="content-container">
+      <!-- Header de boas-vindas -->
+      <div class="welcome-header">
+        <h1>🗺️ Bem-vindo ao IFP</h1>
+        <p class="lead">Seja bem-vindo(a) à documentação do IFP!</p>
+        <p class="lead mb-0">Este repositório digital traz uma apresentação completa do software</p>
+      </div>
 
-    <h1 class="text-center mb-4">🗺️ Bem-vindo ao IFP</h1>
-    
-    <h3 class="text-center mb-4">Seja bem-vindo(a) à documentação do IFP!</h3>
+      <!-- Botões de acesso -->
+      <div class="feature-buttons">
+        <a href="requisitos.html" class="feature-btn">
+          <span class="btn-icon">📋</span>
+          <span class="btn-title">Requisitos</span>
+          <span class="btn-subtitle">Funcionais e não funcionais</span>
+        </a>
 
-    <div class="row justify-content-center">
-        <div class="col-md-10">
+        <a href="criterios_de_aceitacao.html" class="feature-btn">
+          <span class="btn-icon">✅</span>
+          <span class="btn-title">Critérios de Aceitação</span>
+          <span class="btn-subtitle">Padrões de qualidade</span>
+        </a>
 
-            <p class="text-center lead mb-5">
-                Este repositório digital traz uma apresentação com alguns temas do software, como:
-            </p>
-            
-            <!-- Botões de acesso -->
-            <div class="row justify-content-center">
-                <div class="col-md-6 mb-3">
+        <a href="diagrama_de_classe.html" class="feature-btn">
+          <span class="btn-icon">📊</span>
+          <span class="btn-title">Diagrama de Classes</span>
+          <span class="btn-subtitle">Estrutura do sistema</span>
+        </a>
 
-                    <a href="requisitos.html" class="btn btn-dark btn-block btn-lg py-3">
-                        📋 Requisitos
-                    </a>
-                </div>
+        <a href="diagrama_de_casos_de_uso.html" class="feature-btn">
+          <span class="btn-icon">🔗</span>
+          <span class="btn-title">Diagrama de Casos de Uso</span>
+          <span class="btn-subtitle">Interações do usuário</span>
+        </a>
 
-                <div class="col-md-6 mb-3">
+        <a href="historias_de_usuario.html" class="feature-btn">
+          <span class="btn-icon">👥</span>
+          <span class="btn-title">Histórias de Usuário</span>
+          <span class="btn-subtitle">Necessidades dos usuários</span>
+        </a>
 
-                    <a href="criterios_de_aceitacao.html" class="btn btn-dark btn-block btn-lg py-3">
-                        ✅ Critérios de Aceitação
-                    </a>
-                </div>
+        <a href="casos_de_uso.html" class="feature-btn">
+          <span class="btn-icon">💼</span>
+          <span class="btn-title">Casos de Uso</span>
+          <span class="btn-subtitle">Fluxos do sistema</span>
+        </a>
+      </div>
 
-                <div class="col-md-6 mb-3">
-
-                    <a href="diagrama_de_classe.html" class="btn btn-dark btn-block btn-lg py-3">
-                        📊 Diagrama de Classes
-                    </a>
-                </div>
-
-                <div class="col-md-6 mb-3">
-
-                    <a href="diagrama_de_casos_de_uso.html" class="btn btn-dark btn-block btn-lg py-3">
-                        🔗 Diagrama de Casos de Uso
-                    </a>
-                </div>
-
-                <div class="col-md-6 mb-3">
-
-                    <a href="historias_de_usuario.html" class="btn btn-dark btn-block btn-lg py-3">
-                        👥 Histórias de Usuário
-                    </a>
-                </div>
-
-                <div class="col-md-6 mb-3">
-
-                    <a href="casos_de_uso.html" class="btn btn-dark btn-block btn-lg py-3">
-                        💼 Casos de Uso
-                    </a>
-
-                </div>
-            </div>
+      <!-- Informações organizadas -->
+      <div class="info-cards">
+        <div class="info-card">
+          <h3><i class="fas fa-bullseye"></i> Objetivo do IFP</h3>
+          <p>
+            O IFP é voltado para alunos e professores, proporcionando maior transparência 
+            na localização e presença dentro do instituto, beneficiando toda a comunidade acadêmica.
+          </p>
         </div>
+
+        <div class="info-card">
+          <h3><i class="fas fa-users"></i> Público Beneficiado</h3>
+          <p>
+            Diretamente: alunos e professores. Indiretamente: toda a instituição, 
+            através de um sistema mais transparente e eficiente de gestão de presença.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3><i class="fas fa-map-marker-alt"></i> Sistema de Localização</h3>
+          <p>
+            Tecnologia inovadora que permite o acompanhamento em tempo real da localização 
+            de docentes, otimizando a comunicação e organização institucional.
+          </p>
+        </div>
+      </div>
     </div>
-</main>
+  </main>
 
   <!-- Rodapé -->
-
-<footer class="bg-dark text-white text-center py-3 mt-auto">
-
-  <div class="container">
-
-    <h5 class="mb-0">&copy; 2025 IFP - IFAL Presença</h5>
-
-  </div>
-
-</footer>
-
-
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <div class="container">
+      <h5 class="mb-0">&copy; 2025 IFP - IFAL Presença</h5>
+    </div>
+  </footer>
 
   <!-- Scripts do Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -214,5 +372,19 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
+  <!-- JavaScript customizado -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const links = document.querySelectorAll(".navbar-nav .nav-link");
+      const currentPage = window.location.pathname.split("/").pop();
+
+      links.forEach(link => {
+        const linkPage = link.getAttribute("href");
+        if (linkPage === currentPage) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
