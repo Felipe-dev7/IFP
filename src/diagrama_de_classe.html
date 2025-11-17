@@ -1,737 +1,511 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Diagrama de Classes - IFP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gerenciamento de Classes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  <!-- Meta descrição para SEO -->
-  <meta name="description" content="Diagrama de classes do sistema IFP">
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-  <!-- CSS do Bootstrap -->
-  <link rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous">
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-  <!-- Font Awesome para ícones -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
 
-  <!-- CSS customizado -->
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
 
-    body {
-      display: flex;
-      flex-direction: column;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-    }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
 
-    main {
-      flex: 1;
-      padding: 20px 0;
-    }
+        .dashboard {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
 
-    .breadcrumb {
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 0;
-      margin-bottom: 0;
-      padding: 10px 15px;
-    }
+        .sidebar {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
-    .diagram-container {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-      padding: 25px;
-      margin: 20px auto;
-      max-width: 1400px;
-    }
+        .class-list {
+            list-style: none;
+        }
 
-    .page-title {
-      color: #00258b;
-      text-align: center;
-      margin-bottom: 30px;
-      font-weight: 700;
-      position: relative;
-    }
+        .class-item {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: #f1f1f1;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid #1a2a6c;
+        }
 
-    .page-title:after {
-      content: '';
-      display: block;
-      width: 100px;
-      height: 4px;
-      background: linear-gradient(to right, #007bff, #00258b);
-      margin: 10px auto;
-      border-radius: 2px;
-    }
+        .class-item:hover {
+            background: #e0e0e0;
+            transform: translateX(5px);
+        }
 
-    /* Sistema de Grid para o Diagrama */
-    .classes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-bottom: 30px;
-    }
+        .class-item.active {
+            background: #1a2a6c;
+            color: white;
+        }
 
-    .class-card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border-top: 4px solid #007bff;
-    }
+        .main-content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
-    .class-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
+        .class-details {
+            display: none;
+        }
 
-    .class-header {
-      background: #f8f9fa;
-      padding: 15px;
-      border-bottom: 1px solid #e9ecef;
-    }
+        .class-details.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
 
-    .class-name {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #00258b;
-      margin: 0;
-      display: flex;
-      align-items: center;
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .class-name i {
-      margin-right: 10px;
-      font-size: 1.1rem;
-    }
+        .class-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
 
-    .class-body {
-      padding: 15px;
-    }
+        .class-name {
+            font-size: 1.8rem;
+            color: #1a2a6c;
+        }
 
-    .attributes-section, .methods-section {
-      margin-bottom: 15px;
-    }
+        .class-type {
+            background: #1a2a6c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
 
-    .section-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #6c757d;
-      margin-bottom: 8px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid #f1f1f1;
-      display: flex;
-      align-items: center;
-    }
+        .attributes, .methods {
+            margin-bottom: 25px;
+        }
 
-    .section-title i {
-      margin-right: 8px;
-      font-size: 0.8rem;
-    }
+        h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
 
-    .attribute-item, .method-item {
-      font-family: 'Courier New', monospace;
-      font-size: 0.85rem;
-      padding: 4px 0;
-      border-bottom: 1px dashed #f8f9fa;
-    }
+        .attribute-list, .method-list {
+            list-style: none;
+        }
 
-    .attribute-item:last-child, .method-item:last-child {
-      border-bottom: none;
-    }
+        .attribute-item, .method-item {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 3px solid #b21f1f;
+        }
 
-    .attribute-type {
-      color: #28a745;
-      font-weight: 600;
-    }
+        .method-item {
+            border-left-color: #fdbb2d;
+        }
 
-    .method-name {
-      color: #dc3545;
-      font-weight: 600;
-    }
+        .attribute-name, .method-name {
+            font-weight: bold;
+            color: #1a2a6c;
+        }
 
-    .method-params {
-      color: #6c757d;
-    }
+        .attribute-type, .method-return {
+            color: #b21f1f;
+            font-style: italic;
+        }
 
-    .method-return {
-      color: #007bff;
-      font-weight: 600;
-    }
+        .method-visibility {
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+            font-weight: bold;
+            margin-right: 5px;
+        }
 
-    /* Painel de detalhes */
-    .details-panel {
-      background-color: white;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      margin-top: 30px;
-      display: none;
-      border-top: 3px solid #007bff;
-    }
+        .public { color: green; }
+        .private { color: red; }
+        .protected { color: orange; }
 
-    .details-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #e9ecef;
-    }
+        .relationships {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
 
-    .details-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #00258b;
-      margin: 0;
-    }
+        .relationship-item {
+            padding: 8px;
+            margin-bottom: 5px;
+            background: white;
+            border-radius: 3px;
+        }
 
-    .close-details {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: #6c757d;
-      cursor: pointer;
-    }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
 
-    .details-content {
-      line-height: 1.6;
-    }
-
-    .class-description {
-      margin-bottom: 20px;
-      padding: 15px;
-      background: #f8f9fa;
-      border-radius: 6px;
-      border-left: 4px solid #007bff;
-    }
-
-    .relationships-section {
-      margin-top: 20px;
-    }
-
-    .relationship-item {
-      padding: 10px;
-      margin-bottom: 10px;
-      background: #f8f9fa;
-      border-radius: 6px;
-      border-left: 4px solid #28a745;
-    }
-
-    /* Animações */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .fade-in {
-      animation: fadeIn 0.5s ease-in;
-    }
-
-    /* Responsividade */
-    @media (max-width: 768px) {
-      .classes-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .class-card {
-        margin-bottom: 20px;
-      }
-    }
-
-    /* Cores diferentes para cada classe */
-    .usuario-class { border-top-color: #dc3545; }
-    .mensagem-class { border-top-color: #28a745; }
-    .iberato-class { border-top-color: #ffc107; }
-    .local-class { border-top-color: #6f42c1; }
-    .localization-class { border-top-color: #20c997; }
-    .predecessor-class { border-top-color: #fd7e14; }
-    .alieno-class { border-top-color: #e83e8c; }
-    .presented-class { border-top-color: #6c757d; }
-    .terms-class { border-top-color: #00258b; }
-  </style>
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <!-- Barra de navegação -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom shadow-lg">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="home.html">
-        <span class="bg-primary rounded-circle p-2 mr-2">📁</span>
-        <strong>IFP</strong>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item mx-1">
-            <a class="nav-link btn btn-primary btn-sm text-white" href="home.html">🏠 Home</a>
-          </li>
-          <li class="nav-item dropdown mx-1">
-            <a class="nav-link btn btn-success btn-sm text-white dropdown-toggle" 
-              href="#" data-toggle="dropdown">
-                📋 Docs
-            </a>
-            <div class="dropdown-menu">
-              <h6 class="dropdown-header">Documentação</h6>
-              <a class="dropdown-item" href="requisitos.html">📝 Requisitos</a>
-              <a class="dropdown-item" href="criterios_de_aceitacao.html">✅ Critérios</a>
-              <a class="dropdown-item" href="historias_de_usuario.html">👥 Histórias</a>
-              <a class="dropdown-item" href="casos_de_uso.html">💼 Casos</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown mx-1">
-            <a class="nav-link btn btn-info btn-sm text-white dropdown-toggle" 
-              href="#" data-toggle="dropdown">
-                📊 Diagramas
-            </a>
-            <div class="dropdown-menu">
-              <h6 class="dropdown-header">Modelos Visuais</h6>
-              <a class="dropdown-item active" href="diagrama_de_classe.html">🔄 Classes</a>
-              <a class="dropdown-item" href="diagrama_de_casos_de_uso.html">🔗 Casos de Uso</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+        <header>
+            <h1>Sistema de Gerenciamento de Classes</h1>
+            <p class="subtitle">Visualize e gerencie as classes do sistema</p>
+        </header>
 
-  <!-- Breadcrumb -->
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="home.html">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Diagramas</a></li>
-      <li class="breadcrumb-item active" aria-current="page"><strong>Diagrama de Classes</strong></li>
-    </ol>
-  </nav>
+        <div class="dashboard">
+            <div class="sidebar">
+                <h3>Classes do Sistema</h3>
+                <ul class="class-list">
+                    <li class="class-item active" data-class="uario">Unuario</li>
+                    <li class="class-item" data-class="iterato">Iterato</li>
+                    <li class="class-item" data-class="localization">Local Localization</li>
+                    <li class="class-item" data-class="predecessor">Predecessor</li>
+                    <li class="class-item" data-class="aileno">Aileno Presented</li>
+                    <li class="class-item" data-class="reincapce">Reincapce</li>
+                    <li class="class-item" data-class="terms">Terms</li>
+                </ul>
+            </div>
 
-  <!-- Conteúdo principal -->
-  <main>
-    <div class="container">
-      <h1 class="page-title">Diagrama de Classes - Sistema IFP</h1>
-      
-      <div class="diagram-container fade-in">
-        <!-- Grid de Classes -->
-        <div class="classes-grid">
-          <!-- Classe Unuario -->
-          <div class="class-card usuario-class" data-class="unuario">
-            <div class="class-header">
-              <h3 class="class-name"><i class="fas fa-user"></i>Unuario</h3>
-            </div>
-            <div class="class-body">
-              <div class="attributes-section">
-                <div class="section-title"><i class="fas fa-list"></i>Atributos</div>
-                <div class="attribute-item">- name: <span class="attribute-type">String</span></div>
-                <div class="attribute-item">- name: <span class="attribute-type">String</span></div>
-                <div class="attribute-item">- class: <span class="attribute-type">String</span></div>
-              </div>
-              <div class="methods-section">
-                <div class="section-title"><i class="fas fa-cogs"></i>Métodos</div>
-                <div class="method-item">- verification: <span class="method-return">void</span></div>
-                <div class="method-item">- verifytest::null: <span class="method-return">void</span></div>
-                <div class="method-item">- verifytest::default: <span class="method-return">void</span></div>
-                <div class="method-item">- ver(name): <span class="method-return">void</span></div>
-                <div class="method-item">- notations::negation::string string: <span class="method-return">void</span></div>
-                <div class="method-item">- notations::append: <span class="method-return">void</span></div>
-                <div class="method-item">- notations::nonlocal string: <span class="method-return">void</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Classe Mencagem -->
-          <div class="class-card mensagem-class" data-class="mencagem">
-            <div class="class-header">
-              <h3 class="class-name"><i class="fas fa-envelope"></i>Mencagem</h3>
-            </div>
-            <div class="class-body">
-              <div class="attributes-section">
-                <div class="section-title"><i class="fas fa-list"></i>Atributos</div>
-                <div class="attribute-item">- index: <span class="attribute-type">String</span></div>
-                <div class="attribute-item">- database: <span class="attribute-type">Data</span></div>
-                <div class="attribute-item">- metadata: <span class="attribute-type">Unuario</span></div>
-                <div class="attribute-item">- destination: <span class="attribute-type">Unuario</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Classe Iberato -->
-          <div class="class-card iberato-class" data-class="iberato">
-            <div class="class-header">
-              <h3 class="class-name"><i class="fas fa-cog"></i>Iberato</h3>
-            </div>
-            <div class="class-body">
-              <div class="attributes-section">
-                <div class="section-title"><i class="fas fa-list"></i>Atributos</div>
-                <div class="attribute-item">- preference: <span class="attribute-type">String</span></div>
-                <div class="attribute-item">- document: <span class="attribute-type">String</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Classe Local -->
-          <div class="class-card local-class" data-class="local">
-            <div class="class-header">
-              <h3 class="class-name"><i class="fas fa-map-marker-alt"></i>Local</h3>
-            </div>
-            <div class="class-body">
-              <div class="attributes-section">
-                <div class="section-title"><i class="fas fa-list"></i>Atributos</div>
-                <div class="attribute-item">- link: <span class="attribute-type">String</span></div>
-                <div class="attribute-item">- bloc: <span class="attribute-type">String</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Classe Localization -->
-          <div class="class-card localization-class" data-class="localization">
-            <div class="class-header">
-              <h3 class="class-name"><i class="fas fa-location-arrow"></i>Localization</h3>
-            </div>
-            <div class="class-body">
-              <div class="attributes-section">
-                <div class="section-title"><i class="fas fa-list"></i>Atributos</div>
-                <div class="attribute-item">- local: <span class="attribute-type">String</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Classe Predecessor -->
-          <div class="class-card predecessor-class" data-class="predecessor">
-            <div class="class-header">
-              <h3 class="class-name"><i class="fas fa-chess-king"></i>Predecessor</h3>
-            </div>
-            <div class="class-body">
-              <div class="attributes-section">
-                <div class="section-title"><i class="fas fa-list"></i>Atributos</div>
-                <div class="attribute-item">- access: <span class="attribute-type">int</span></div>
-              </div>
-              <div class="methods-section">
-                <div class="section-title"><i class="fas fa-cogs"></i>Métodos</div>
-                <div class="method-item">- correct::address::get(): <span class="method-return">void</span></div>
-                <div class="method-item">- protected::format(): <span class="method-return">void</span></div>
-                <div class="method-item">- deleted::address::get(): <span class="method-return">void</span></div>
-                <div class="method-item">- deleted::address::not(): <span class="method-return">void</span></div>
-                <div class="method-item">- protected::boolean::int(): <span class="method-return">void</span></div>
-                <div class="method-item">- failed::affred::else(): <span class="method-return">void</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Classe Alieno -->
-          <div class="class-card alieno-class" data-class="alieno">
-            <div class="class-header">
-              <h3 class="class-name"><i class="fas fa-user-alt"></i>Alieno</h3>
-            </div>
-            <div class="class-body">
-              <div class="attributes-section">
-                <div class="section-title"><i class="fas fa-list"></i>Atributos</div>
-                <div class="attribute-item">- access: <span class="attribute-type">int</span></div>
-              </div>
-              <div class="methods-section">
-                <div class="section-title"><i class="fas fa-cogs"></i>Métodos</div>
-                <div class="method-item">- correct::codification::local: <span class="method-return">String; void</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Classe Presented -->
-          <div class="class-card presented-class" data-class="presented">
-            <div class="class-header">
-              <h3 class="class-name"><i class="fas fa-calendar-check"></i>Presented</h3>
-            </div>
-            <div class="class-body">
-              <div class="attributes-section">
-                <div class="section-title"><i class="fas fa-list"></i>Atributos</div>
-                <div class="attribute-item">- preterm: <span class="attribute-type">Boolean</span></div>
-                <div class="attribute-item">- border: <span class="attribute-type">DateTime</span></div>
-                <div class="attribute-item">- etc: <span class="attribute-type">Data</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Classe Terms -->
-          <div class="class-card terms-class" data-class="terms">
-            <div class="class-header">
-              <h3 class="class-name"><i class="fas fa-file-contract"></i>Terms</h3>
-            </div>
-            <div class="class-body">
-              <div class="attributes-section">
-                <div class="section-title"><i class="fas fa-list"></i>Atributos</div>
-                <div class="attribute-item">- numeric: <span class="attribute-type">int</span></div>
-                <div class="attribute-item">- case: <span class="attribute-type">String</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Painel de detalhes -->
-        <div class="details-panel" id="detailsPanel">
-          <div class="details-header">
-            <h3 class="details-title" id="detailsTitle">Detalhes da Classe</h3>
-            <button class="close-details" id="closeDetails">&times;</button>
-          </div>
-          <div class="details-content" id="detailsContent">
-            <!-- Conteúdo será preenchido dinamicamente -->
-          </div>
-        </div>
-      </div>
-      
-      <!-- Informações sobre o diagrama -->
-      <div class="row mt-4">
-        <div class="col-md-10 mx-auto">
-          <div class="card">
-            <div class="card-header bg-primary text-white">
-              <h5 class="mb-0"><i class="fas fa-info-circle mr-2"></i>Sobre este Diagrama</h5>
-            </div>
-            <div class="card-body">
-              <p>Este diagrama de classes representa a estrutura do sistema IFP com todas as informações originais mantidas.</p>
-              <p><strong>Clique em qualquer classe para ver todos os detalhes.</strong></p>
-              <div class="row mt-3">
-                <div class="col-md-6">
-                  <h6>Convenções do Diagrama:</h6>
-                  <ul>
-                    <li><strong>- atributo: Tipo</strong> - Atributo privado</li>
-                    <li><strong>- metodo(): TipoRetorno</strong> - Método privado</li>
-                    <li><strong>String, int, Boolean</strong> - Tipos de dados</li>
-                  </ul>
+            <div class="main-content">
+                <!-- Detalhes da Classe Unuario -->
+                <div class="class-details active" id="class-uario">
+                    <div class="class-header">
+                        <h2 class="class-name">Unuario</h2>
+                        <span class="class-type">Classe</span>
+                    </div>
+                    
+                    <div class="attributes">
+                        <h3>Atributos</h3>
+                        <ul class="attribute-list">
+                            <li class="attribute-item">
+                                <span class="attribute-name">name</span>: 
+                                <span class="attribute-type">String</span>
+                            </li>
+                            <li class="attribute-item">
+                                <span class="attribute-name">class</span>: 
+                                <span class="attribute-type">String</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="methods">
+                        <h3>Métodos</h3>
+                        <ul class="method-list">
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">verification()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">verifytest::Null()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">verifytest::default()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">ver(name)</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">notations::negation::string()</span>: 
+                                <span class="method-return">string</span>
+                            </li>
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">notations::append()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <h6>Como usar:</h6>
-                  <ul>
-                    <li>Clique em uma classe para ver detalhes</li>
-                    <li>Cada cor representa uma classe diferente</li>
-                    <li>Use o botão X para fechar os detalhes</li>
-                  </ul>
+
+                <!-- Detalhes da Classe Iterato -->
+                <div class="class-details" id="class-iterato">
+                    <div class="class-header">
+                        <h2 class="class-name">Iterato</h2>
+                        <span class="class-type">Classe</span>
+                    </div>
+                    
+                    <div class="attributes">
+                        <h3>Atributos</h3>
+                        <ul class="attribute-list">
+                            <li class="attribute-item">
+                                <span class="attribute-name">preference</span>: 
+                                <span class="attribute-type">String</span>
+                            </li>
+                            <li class="attribute-item">
+                                <span class="attribute-name">document</span>: 
+                                <span class="attribute-type">String</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-              </div>
+
+                <!-- Detalhes da Classe Local Localization -->
+                <div class="class-details" id="class-localization">
+                    <div class="class-header">
+                        <h2 class="class-name">Local Localization</h2>
+                        <span class="class-type">Classe</span>
+                    </div>
+                    
+                    <div class="attributes">
+                        <h3>Atributos</h3>
+                        <ul class="attribute-list">
+                            <li class="attribute-item">
+                                <span class="attribute-name">link</span>: 
+                                <span class="attribute-type">String</span>
+                            </li>
+                            <li class="attribute-item">
+                                <span class="attribute-name">local</span>: 
+                                <span class="attribute-type">String</span>
+                            </li>
+                            <li class="attribute-item">
+                                <span class="attribute-name">bloc</span>: 
+                                <span class="attribute-type">String</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Detalhes da Classe Predecessor -->
+                <div class="class-details" id="class-predecessor">
+                    <div class="class-header">
+                        <h2 class="class-name">Predecessor</h2>
+                        <span class="class-type">Classe</span>
+                    </div>
+                    
+                    <div class="attributes">
+                        <h3>Atributos</h3>
+                        <ul class="attribute-list">
+                            <li class="attribute-item">
+                                <span class="attribute-name">access</span>: 
+                                <span class="attribute-type">int</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="methods">
+                        <h3>Métodos</h3>
+                        <ul class="method-list">
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">correct::address::get()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                            <li class="method-item">
+                                <span class="method-visibility protected">#</span>
+                                <span class="method-name">protected::format()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">deleted::address::get()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">deleted::address::not()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                            <li class="method-item">
+                                <span class="method-visibility protected">#</span>
+                                <span class="method-name">protected::boolean::int()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">failed::affordable()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Detalhes da Classe Aileno Presented -->
+                <div class="class-details" id="class-aileno">
+                    <div class="class-header">
+                        <h2 class="class-name">Aileno Presented</h2>
+                        <span class="class-type">Classe</span>
+                    </div>
+                    
+                    <div class="attributes">
+                        <h3>Atributos</h3>
+                        <ul class="attribute-list">
+                            <li class="attribute-item">
+                                <span class="attribute-name">access</span>: 
+                                <span class="attribute-type">int</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="methods">
+                        <h3>Métodos</h3>
+                        <ul class="method-list">
+                            <li class="method-item">
+                                <span class="method-visibility public">+</span>
+                                <span class="method-name">correct::coafficatString()</span>: 
+                                <span class="method-return">void</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Detalhes da Classe Reincapce -->
+                <div class="class-details" id="class-reincapce">
+                    <div class="class-header">
+                        <h2 class="class-name">Reincapce</h2>
+                        <span class="class-type">Classe</span>
+                    </div>
+                    
+                    <div class="attributes">
+                        <h3>Atributos</h3>
+                        <ul class="attribute-list">
+                            <li class="attribute-item">
+                                <span class="attribute-name">index</span>: 
+                                <span class="attribute-type">String</span>
+                            </li>
+                            <li class="attribute-item">
+                                <span class="attribute-name">database</span>: 
+                                <span class="attribute-type">Data</span>
+                            </li>
+                            <li class="attribute-item">
+                                <span class="attribute-name">metadata</span>: 
+                                <span class="attribute-type">Unuario</span>
+                            </li>
+                            <li class="attribute-item">
+                                <span class="attribute-name">destination</span>: 
+                                <span class="attribute-type">Unuario</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="relationships">
+                        <h3>Relações</h3>
+                        <div class="relationship-item">Associação com: Unuario (metadata)</div>
+                        <div class="relationship-item">Associação com: Unuario (destination)</div>
+                    </div>
+                </div>
+
+                <!-- Detalhes da Classe Terms -->
+                <div class="class-details" id="class-terms">
+                    <div class="class-header">
+                        <h2 class="class-name">Terms</h2>
+                        <span class="class-type">Classe</span>
+                    </div>
+                    
+                    <div class="attributes">
+                        <h3>Atributos</h3>
+                        <ul class="attribute-list">
+                            <li class="attribute-item">
+                                <span class="attribute-name">numeric</span>: 
+                                <span class="attribute-type">int</span>
+                            </li>
+                            <li class="attribute-item">
+                                <span class="attribute-name">case</span>: 
+                                <span class="attribute-type">String</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+
+        <footer>
+            <p>Sistema de Gerenciamento de Classes &copy; 2023</p>
+        </footer>
     </div>
-  </main>
 
-  <!-- Rodapé -->
-  <footer class="bg-dark text-white text-center py-3 mt-auto">
-    <div class="container">
-      <h5 class="mb-0">&copy; 2025 IFP - Sistema de Gestão Acadêmica</h5>
-    </div>
-  </footer>
-
-  <!-- Scripts do Bootstrap -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGaR9G4Q9ANmF6YFZ94i+6oDkG"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-
-  <!-- JavaScript customizado -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Dados das classes - mantendo todas as informações originais
-      const classesData = {
-        "unuario": {
-          title: "Unuario",
-          description: "Classe principal do usuário do sistema",
-          attributes: [
-            { name: "name", type: "String", visibility: "-" },
-            { name: "name", type: "String", visibility: "-" },
-            { name: "class", type: "String", visibility: "-" }
-          ],
-          methods: [
-            { name: "verification", params: "", return: "void", visibility: "-" },
-            { name: "verifytest::null", params: "", return: "void", visibility: "-" },
-            { name: "verifytest::default", params: "", return: "void", visibility: "-" },
-            { name: "ver", params: "(name)", return: "void", visibility: "-" },
-            { name: "notations::negation::string string", params: "", return: "void", visibility: "-" },
-            { name: "notations::append", params: "", return: "void", visibility: "-" },
-            { name: "notations::nonlocal string", params: "", return: "void", visibility: "-" }
-          ]
-        },
-        "mencagem": {
-          title: "Mencagem",
-          description: "Classe para gerenciamento de mensagens",
-          attributes: [
-            { name: "index", type: "String", visibility: "-" },
-            { name: "database", type: "Data", visibility: "-" },
-            { name: "metadata", type: "Unuario", visibility: "-" },
-            { name: "destination", type: "Unuario", visibility: "-" }
-          ],
-          methods: []
-        },
-        "iberato": {
-          title: "Iberato",
-          description: "Classe de configurações e preferências",
-          attributes: [
-            { name: "preference", type: "String", visibility: "-" },
-            { name: "document", type: "String", visibility: "-" }
-          ],
-          methods: []
-        },
-        "local": {
-          title: "Local",
-          description: "Classe para informações de localização",
-          attributes: [
-            { name: "link", type: "String", visibility: "-" },
-            { name: "bloc", type: "String", visibility: "-" }
-          ],
-          methods: []
-        },
-        "localization": {
-          title: "Localization",
-          description: "Classe especializada em localização",
-          attributes: [
-            { name: "local", type: "String", visibility: "-" }
-          ],
-          methods: []
-        },
-        "predecessor": {
-          title: "Predecessor",
-          description: "Classe base com métodos de acesso",
-          attributes: [
-            { name: "access", type: "int", visibility: "-" }
-          ],
-          methods: [
-            { name: "correct::address::get", params: "()", return: "void", visibility: "-" },
-            { name: "protected::format", params: "()", return: "void", visibility: "-" },
-            { name: "deleted::address::get", params: "()", return: "void", visibility: "-" },
-            { name: "deleted::address::not", params: "()", return: "void", visibility: "-" },
-            { name: "protected::boolean::int", params: "()", return: "void", visibility: "-" },
-            { name: "failed::affred::else", params: "()", return: "void", visibility: "-" }
-          ]
-        },
-        "alieno": {
-          title: "Alieno",
-          description: "Classe com métodos de codificação",
-          attributes: [
-            { name: "access", type: "int", visibility: "-" }
-          ],
-          methods: [
-            { name: "correct::codification::local", params: "", return: "String; void", visibility: "-" }
-          ]
-        },
-        "presented": {
-          title: "Presented",
-          description: "Classe para dados de apresentação/presença",
-          attributes: [
-            { name: "preterm", type: "Boolean", visibility: "-" },
-            { name: "border", type: "DateTime", visibility: "-" },
-            { name: "etc", type: "Data", visibility: "-" }
-          ],
-          methods: []
-        },
-        "terms": {
-          title: "Terms",
-          description: "Classe para termos e condições",
-          attributes: [
-            { name: "numeric", type: "int", visibility: "-" },
-            { name: "case", type: "String", visibility: "-" }
-          ],
-          methods: []
-        }
-      };
-
-      // Elementos do DOM
-      const detailsPanel = document.getElementById('detailsPanel');
-      const detailsTitle = document.getElementById('detailsTitle');
-      const detailsContent = document.getElementById('detailsContent');
-      const closeDetails = document.getElementById('closeDetails');
-      const classCards = document.querySelectorAll('.class-card');
-
-      // Adicionar event listeners para as classes
-      classCards.forEach(card => {
-        card.addEventListener('click', function() {
-          const classId = this.getAttribute('data-class');
-          showClassDetails(classId);
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const classItems = document.querySelectorAll('.class-item');
+            const classDetails = document.querySelectorAll('.class-details');
+            
+            classItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove a classe active de todos os itens
+                    classItems.forEach(i => i.classList.remove('active'));
+                    classDetails.forEach(d => d.classList.remove('active'));
+                    
+                    // Adiciona a classe active ao item clicado
+                    this.classList.add('active');
+                    
+                    // Mostra os detalhes da classe correspondente
+                    const classId = this.getAttribute('data-class');
+                    const classDetail = document.getElementById(`class-${classId}`);
+                    if (classDetail) {
+                        classDetail.classList.add('active');
+                    }
+                });
+            });
         });
-      });
-
-      // Adicionar event listener para o botão de fechar
-      closeDetails.addEventListener('click', function() {
-        detailsPanel.style.display = 'none';
-      });
-
-      // Função para mostrar detalhes da classe
-      function showClassDetails(classId) {
-        const classData = classesData[classId];
-        
-        if (classData) {
-          detailsTitle.textContent = classData.title;
-          
-          let detailsHTML = `
-            <div class="class-description">
-              <p><strong>Descrição:</strong> ${classData.description}</p>
-            </div>
-            
-            <div class="attributes-section">
-              <h5><i class="fas fa-list mr-2"></i>Atributos</h5>
-          `;
-          
-          if (classData.attributes.length > 0) {
-            classData.attributes.forEach(attr => {
-              detailsHTML += `
-                <div class="attribute-item mb-2 p-2 bg-light rounded">
-                  <code>${attr.visibility} ${attr.name}: ${attr.type}</code>
-                </div>
-              `;
-            });
-          } else {
-            detailsHTML += `<p class="text-muted">Nenhum atributo definido</p>`;
-          }
-          
-          detailsHTML += `</div>`;
-          
-          if (classData.methods.length > 0) {
-            detailsHTML += `
-              <div class="methods-section mt-4">
-                <h5><i class="fas fa-cogs mr-2"></i>Métodos</h5>
-            `;
-            
-            classData.methods.forEach(method => {
-              detailsHTML += `
-                <div class="method-item mb-2 p-2 bg-light rounded">
-                  <code>${method.visibility} ${method.name}${method.params}: ${method.return}</code>
-                </div>
-              `;
-            });
-            
-            detailsHTML += `</div>`;
-          }
-          
-          detailsContent.innerHTML = detailsHTML;
-          detailsPanel.style.display = 'block';
-          
-          // Scroll suave para o painel de detalhes
-          detailsPanel.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-
-      // Ativar link atual na navegação
-      const links = document.querySelectorAll(".navbar-nav .nav-link");
-      const currentPage = window.location.pathname.split("/").pop();
-
-      links.forEach(link => {
-        const linkPage = link.getAttribute("href");
-        if (linkPage === currentPage) {
-          link.classList.add("active");
-        }
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>
