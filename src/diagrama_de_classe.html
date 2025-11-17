@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Requisitos do Sistema - IFP</title>
+  <title>Diagrama de Classes - IFP</title>
 
   <!-- CSS do Bootstrap -->
   <link rel="stylesheet"
@@ -36,7 +36,7 @@
     }
 
     .content-container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
@@ -47,89 +47,45 @@
       text-align: center;
     }
 
-    /* Estilo clean para os cards */
-    .card-requisito {
-      transition: all 0.3s ease;
-      border: 1px solid #e3e6f0;
-      margin-bottom: 20px;
-      border-radius: 8px;
-    }
-
-    .card-requisito:hover {
-      transform: translateY(-2px);
+    /* Container da imagem */
+    .image-container {
+      background: white;
+      border-radius: 10px;
+      padding: 40px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      text-align: center;
     }
 
-    .card-header {
-      background-color: #f8f9fa;
-      border-bottom: 1px solid #e3e6f0;
-      padding: 15px 20px;
-    }
-
-    .badge-rf {
-      background-color: #28a745;
-    }
-
-    .badge-id {
-      background-color: #007bff;
-    }
-
-    .search-container {
-      background-color: white;
+    .diagram-image {
+      max-width: 100%;
+      height: auto;
       border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .filter-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .filter-btn {
-      border-radius: 20px;
-      padding: 5px 15px;
-      font-size: 0.85rem;
-    }
-
-    .filter-btn.active {
-      background-color: #007bff;
+    .image-placeholder {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 8px;
+      padding: 80px 40px;
       color: white;
+      margin: 0 auto;
+      max-width: 800px;
     }
 
-    .requisito-details {
-      display: none;
-      background-color: white;
-      border-radius: 8px;
-      padding: 20px;
-      margin-top: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border-top: 3px solid #007bff;
+    .image-placeholder i {
+      font-size: 4rem;
+      margin-bottom: 20px;
     }
 
-    .requisitos-list {
-      max-height: 70vh;
-      overflow-y: auto;
-    }
-
-    .requisito-item {
-      padding-left: 10px;
-      margin-bottom: 8px;
-      position: relative;
-    }
-
-    .requisito-item:before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #007bff;
-    }
-
-    .back-to-list {
+    .image-placeholder h3 {
       margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .image-placeholder p {
+      opacity: 0.9;
+      margin-bottom: 0;
     }
 
     /* Breadcrumb */
@@ -138,20 +94,18 @@
       margin-bottom: 0;
     }
 
-    /* Animações */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .fade-in {
-      animation: fadeIn 0.5s ease-in;
-    }
-
     /* Responsividade */
     @media (max-width: 768px) {
-      .filter-buttons {
-        justify-content: center;
+      .image-container {
+        padding: 20px;
+      }
+      
+      .image-placeholder {
+        padding: 60px 20px;
+      }
+      
+      .image-placeholder i {
+        font-size: 3rem;
       }
     }
   </style>
@@ -205,43 +159,54 @@
   <!-- Breadcrumb -->
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page"><h5><strong>Requisitos do Sistema</strong></h5></li>
+      <li class="breadcrumb-item active" aria-current="page"><h5><strong>Diagrama de Classes</strong></h5></li>
     </ol>
   </nav>
 
   <!-- Conteúdo principal -->
   <main>
     <div class="content-container">
-      <h1>Requisitos do Sistema</h1>
+      <h1>Diagrama de Classes</h1>
       
-      <!-- Área de busca e filtros -->
-      <div class="search-container fade-in">
-        <div class="form-group mb-0">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-search"></i></span>
+      <div class="image-container">
+        <!-- Substitua o src pela URL da sua imagem -->
+        <img src="/assets/diagrama_de_classes.png" alt="Diagrama de Classes do Sistema" class="diagram-image">
+        
+        <!-- Placeholder que será substituído pela imagem -->
+        <!--
+        <div class="image-placeholder">
+          <i class="fas fa-project-diagram"></i>
+          <h3>Diagrama de Classes</h3>
+          <p>Imagem do diagrama será carregada aqui</p>
+          <p class="small">Substitua este placeholder pela imagem "diagrama_de_classes.png"</p>
+        </div>
+        -->
+      </div>
+
+      <!-- Informações sobre o diagrama -->
+      <div class="row mt-4">
+        <div class="col-md-8 mx-auto">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title">Sobre o Diagrama</h5>
+              <p class="card-text">
+                Este diagrama representa a estrutura de classes do sistema IFP, mostrando os principais componentes, 
+                seus atributos, métodos e relacionamentos.
+              </p>
+              <div class="row text-muted small">
+                <div class="col-md-4">
+                  <i class="fas fa-cube mr-2"></i>9 Classes
+                </div>
+                <div class="col-md-4">
+                  <i class="fas fa-list mr-2"></i>Atributos e Métodos
+                </div>
+                <div class="col-md-4">
+                  <i class="fas fa-sitemap mr-2"></i>Relacionamentos
+                </div>
+              </div>
             </div>
-            <input type="text" id="searchInput" class="form-control" placeholder="Buscar requisitos...">
           </div>
         </div>
-        
-        <div class="filter-buttons">
-          <button class="btn btn-outline-primary filter-btn active" data-filter="all">Todos</button>
-          <button class="btn btn-outline-primary filter-btn" data-filter="RF">Funcionais</button>
-          <button class="btn btn-outline-primary filter-btn" data-filter="RNF">Não Funcionais</button>
-          <button class="btn btn-outline-primary filter-btn" data-filter="alta">Prioridade Alta</button>
-          <button class="btn btn-outline-primary filter-btn" data-filter="media">Prioridade Média</button>
-        </div>
-      </div>
-
-      <!-- Lista de requisitos -->
-      <div id="requisitosList" class="requisitos-list fade-in">
-        <!-- Os requisitos serão carregados aqui via JavaScript -->
-      </div>
-
-      <!-- Detalhes do requisito selecionado -->
-      <div id="requisitoDetails" class="requisito-details">
-        <!-- Conteúdo será preenchido via JavaScript -->
       </div>
     </div>
   </main>
@@ -266,223 +231,8 @@
 
   <!-- JavaScript customizado -->
   <script>
-    // Dados dos requisitos
-    const requisitos = [
-      {
-        id: "RF01",
-        tipo: "RF",
-        prioridade: "alta",
-        titulo: "Leitura biométrica para registro de presença",
-        descricao: "Sistema de registro de presença utilizando biometria para validação de docentes",
-        criterios: [
-          "Validar digital contra base de dados cadastrada",
-          "Registrar presença automaticamente ao reconhecer digital",
-          "Gerar alerta em caso de digital não reconhecida",
-          "Manter histórico de registros de presença"
-        ]
-      },
-      {
-        id: "RF02",
-        tipo: "RF",
-        prioridade: "alta",
-        titulo: "Acesso ao sistema por meio de aplicativo mobile",
-        descricao: "Aplicativo mobile para acesso às funcionalidades do sistema",
-        criterios: [
-          "Interface responsiva para smartphones",
-          "Login seguro com autenticação",
-          "Sincronização em tempo real com sistema principal",
-          "Funcionalidades offline quando aplicável"
-        ]
-      },
-      {
-        id: "RF03",
-        tipo: "RF",
-        prioridade: "media",
-        titulo: "Função de localização do docente",
-        descricao: "Sistema de geolocalização para registro de posição no campus",
-        criterios: [
-          "Captura automática de localização via GPS",
-          "Entrada manual de localização",
-          "Vinculação de localização com horário de aula",
-          "Visualização de localização em mapa do campus"
-        ]
-      },
-      {
-        id: "RNF01",
-        tipo: "RNF",
-        prioridade: "alta",
-        titulo: "Segurança dos dados biométricos",
-        descricao: "Proteção e criptografia dos dados sensíveis",
-        criterios: [
-          "Criptografia AES-256 para dados biométricos",
-          "Armazenamento seguro em banco de dados",
-          "Conformidade com LGPD",
-          "Auditoria de acesso aos dados sensíveis"
-        ]
-      },
-      {
-        id: "RNF02",
-        tipo: "RNF",
-        prioridade: "media",
-        titulo: "Performance do sistema",
-        descricao: "Requisitos de desempenho e responsividade",
-        criterios: [
-          "Tempo de resposta inferior a 2 segundos",
-          "Suporte a 1000 usuários concorrentes",
-          "Disponibilidade de 99.5%",
-          "Backup automático diário"
-        ]
-      }
-    ];
-
-    // Função para renderizar a lista de requisitos
-    function renderRequisitos(filteredRequisitos = requisitos) {
-      const requisitosList = document.getElementById('requisitosList');
-      requisitosList.innerHTML = '';
-
-      if (filteredRequisitos.length === 0) {
-        requisitosList.innerHTML = `
-          <div class="alert alert-info text-center">
-            <i class="fas fa-info-circle mr-2"></i>
-            Nenhum requisito encontrado com os filtros atuais.
-          </div>
-        `;
-        return;
-      }
-
-      filteredRequisitos.forEach(requisito => {
-        const card = document.createElement('div');
-        card.className = 'card card-requisito';
-        card.setAttribute('data-id', requisito.id);
-        
-        card.innerHTML = `
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <div>
-              <span class="badge badge-id mr-2">${requisito.id}</span>
-              <span class="badge badge-rf">${requisito.tipo}</span>
-              <span class="badge badge-${requisito.prioridade === 'alta' ? 'danger' : 'warning'} ml-1">
-                ${requisito.prioridade.toUpperCase()}
-              </span>
-            </div>
-            <button class="btn btn-sm btn-outline-primary view-details" data-id="${requisito.id}">
-              <i class="fas fa-eye mr-1"></i> Detalhes
-            </button>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">${requisito.titulo}</h5>
-            <p class="card-text text-muted">${requisito.descricao}</p>
-          </div>
-        `;
-        
-        requisitosList.appendChild(card);
-      });
-
-      // Adicionar event listeners aos botões de detalhes
-      document.querySelectorAll('.view-details').forEach(button => {
-        button.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const id = this.getAttribute('data-id');
-          showRequisitoDetails(id);
-        });
-      });
-
-      // Adicionar event listener aos cards
-      document.querySelectorAll('.card-requisito').forEach(card => {
-        card.addEventListener('click', function() {
-          const id = this.getAttribute('data-id');
-          showRequisitoDetails(id);
-        });
-      });
-    }
-
-    // Função para mostrar detalhes de um requisito específico
-    function showRequisitoDetails(id) {
-      const requisito = requisitos.find(r => r.id === id);
-      if (!requisito) return;
-
-      const detailsContainer = document.getElementById('requisitoDetails');
-      const requisitosList = document.getElementById('requisitosList');
-      
-      // Esconder lista e mostrar detalhes
-      requisitosList.style.display = 'none';
-      detailsContainer.style.display = 'block';
-      
-      // Preencher detalhes
-      detailsContainer.innerHTML = `
-        <button class="btn btn-outline-secondary btn-sm back-to-list">
-          <i class="fas fa-arrow-left mr-1"></i> Voltar à lista
-        </button>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h3 class="mb-0">
-            <span class="badge badge-id mr-2">${requisito.id}</span>
-            <span class="badge badge-rf">${requisito.tipo}</span>
-            <span class="badge badge-${requisito.prioridade === 'alta' ? 'danger' : 'warning'} ml-1">
-              ${requisito.prioridade.toUpperCase()}
-            </span>
-          </h3>
-        </div>
-        <h4 class="mb-3">${requisito.titulo}</h4>
-        <p class="text-muted mb-4">${requisito.descricao}</p>
-        <h5>Critérios de Aceitação:</h5>
-        <ul class="list-unstyled">
-          ${requisito.criterios.map((item, index) => `
-            <li class="requisito-item mb-2">${item}</li>
-          `).join('')}
-        </ul>
-      `;
-
-      // Adicionar event listener ao botão de voltar
-      detailsContainer.querySelector('.back-to-list').addEventListener('click', function() {
-        detailsContainer.style.display = 'none';
-        requisitosList.style.display = 'block';
-      });
-    }
-
-    // Função para filtrar requisitos
-    function filterRequisitos() {
-      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
-      
-      let filtered = requisitos;
-      
-      // Aplicar filtro por tipo/prioridade
-      if (activeFilter !== 'all') {
-        if (activeFilter === 'RF' || activeFilter === 'RNF') {
-          filtered = filtered.filter(r => r.tipo === activeFilter);
-        } else {
-          filtered = filtered.filter(r => r.prioridade === activeFilter);
-        }
-      }
-      
-      // Aplicar busca textual
-      if (searchTerm) {
-        filtered = filtered.filter(r => 
-          r.titulo.toLowerCase().includes(searchTerm) ||
-          r.descricao.toLowerCase().includes(searchTerm) ||
-          r.criterios.some(item => item.toLowerCase().includes(searchTerm))
-        );
-      }
-      
-      renderRequisitos(filtered);
-    }
-
     // Inicialização quando o DOM estiver carregado
     document.addEventListener('DOMContentLoaded', function() {
-      // Renderizar requisitos iniciais
-      renderRequisitos();
-      
-      // Configurar busca
-      document.getElementById('searchInput').addEventListener('input', filterRequisitos);
-      
-      // Configurar filtros
-      document.querySelectorAll('.filter-btn').forEach(button => {
-        button.addEventListener('click', function() {
-          document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-          this.classList.add('active');
-          filterRequisitos();
-        });
-      });
-
       // Ativar link atual na navegação
       const links = document.querySelectorAll(".navbar-nav .nav-link");
       const currentPage = window.location.pathname.split("/").pop();
